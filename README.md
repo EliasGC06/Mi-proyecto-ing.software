@@ -40,15 +40,25 @@ La área de RH de tener la información más actualizada sobre sus empleados, co
 ## 3. Alcance
 
 **Dentro del alcance**
+
 -Clasificar la información (prospectos, vacantes, personal activo)
+
 -Separar los elementos por categoría/estatus
+
 -Verificar los elementos (validar que los datos capturados sean consistentes)
+
 -Registrar nuevos elementos
+
 -Seleccionar elementos en específico
+
 -Filtrar los elementos (por vacante, urgencia, localidad, etc.)
+
 **Explícitamente fuera del alcance**
+
 -Comparar entre elementos automáticamente (no hace análisis comparativo automático entre prospectos)
+
 -Generar reportes financieros o de nómina exportables
+
 -Enviar notificaciones automáticas por correo o SMS a prospectos o personal
 
 **Por qué queda fuera:**
