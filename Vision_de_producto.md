@@ -10,7 +10,7 @@
 
 ## 1. Descripción del sistema
 
-**Nombre del sistema:** Base de datos e vacantes 
+**Nombre del sistema:** Base de datos de vacantes 
 
 **Descripción:** Es una base de datos sobre las vacantes disponibles, prospectos y el personal que tenemos activo en la empresa. cada prospecto tiene su información como su nombre, edad, puesto, empresa, horario, localidad donde vive, documentos, urgencia por cubrir la vacante, numero de teléfono, escolaridad, correo, problemas médicos, comentarios, etc...
 
@@ -21,7 +21,7 @@
 
 **El problema:** Principal problema es que el proceso de contratación del personal, el cual es muy tardado, complicado y casi en todos los casos hay confusiones en el personal, también entre las diferentes áreas de la empresa , entre R.H., contaduría, finanzas y corporativo  
 
-**Cómo se resuelve hoy sin el sistema:** Con mucha comunicación entre todos los empleado en el área de R.H.
+**Cómo se resuelve hoy sin el sistema:** Con mucha comunicación entre todos los empleado en el área de R.H. Por ejemplo, usan correos, Excel o WhatsApp; ajustan las listas o lo que realmente utilizan. 
 
 **Usuarios del sistema:** Principalmente el área de R.H., pero también estaría abierto a contaduría, finanzas y corporativo; para que están informados por cualquier circunstancia.
 
@@ -33,38 +33,33 @@
 
 
 **Un conflicto entre usuarios:** 
-La área de RH de tener la información más actualizada sobre sus empleados, como algún problema con su nomina, problema de salud o familiar, lo cual es parte de su proceso de selección. Sin embargo, el área de Finanzas, Contaduría y Corporativo quieren estar lo más actualizado posible, por lo cual todas las áreas ven todo lo que pasa, así que podrían ver conflictos entre las áreas, ya que contaduría podría ver lo que hace RH, lo cual so podrían meter en áreas que no le toca a cada área de la empresa.
+El área de Finanzas/Contaduría y Corporativo quieren ver toda la información de los los empleados y prospectos para darles seguimiento a sus nóminas, en el caso de Finanzas/Contaduría, y ver la transparencias de la base de datos de R.H, en cambio, los datos sensibles como problemas médicos, comentarios interinos, situaciones familiares, etc.. solo lo necesita ver R.H, por que toman esos datos bajo confidencialidad durante el proceso de selección. La visibilidad total que necesita las otras áreas se contradice con el tema de que cierta información es restringida para los demás. 
+
+**Cómo se resuelve:**
+Visibilidad de datos según tu área, Finanzas/Contaduría solo ve temas de nómina y estatus de los usuarios, Corporativo solo puede ver el estatus de las vacantes y empleados que estén en la base de datos, una visibilidad amplia pero no completa y R.H ve todo. 
 
 ---
 
 ## 3. Alcance
 
 **Dentro del alcance**
+|Numero| Permite | 
+|---|---|
+|1| Registrar un prospecto con nombre, edad, puesto, empresa, horario, localidad, escolaridad, teléfono y correo. |
+|2| Registrar una vacante con puesto, área, horario, localidad y nivel de urgencia. |
+|3| Asignar a cada prospecto y a cada vacante un estatus (prospecto, en proceso, contratado; vacante disponible, ocupada). |
+|4| Validar que los campos obligatorios estén completos y en formato correcto antes de guardar un registro. |
+|5| Filtrar vacantes y prospectos por puesto, urgencia, localidad y estatus. |
+|6| Adjuntar y consultar los documentos de un prospecto. |
+|7| Restringir la visualización de datos sensibles (problemas médicos, comentarios) solo a usuarios de RH. |
+|8| Mostrar las vacantes urgentes con prioridad a todas las áreas. |
 
--Clasificar la información (prospectos, vacantes, personal activo)
-
--Separar los elementos por categoría/estatus
-
--Verificar los elementos (validar que los datos capturados sean consistentes)
-
--Registrar nuevos elementos
-
--Seleccionar elementos en específico
-
--Filtrar los elementos (por vacante, urgencia, localidad, etc.)
-
-**Explícitamente fuera del alcance**
-
--Comparar entre elementos automáticamente (no hace análisis comparativo automático entre prospectos)
-
--Generar reportes financieros o de nómina exportables
-
--Enviar notificaciones automáticas por correo o SMS a prospectos o personal
-
-**Por qué queda fuera:**
-
-La parte de reportes financieros y nominas, es parte ya del área de contaduría y finanzas, así que ya seria hacer un sistema con ellos, haciendo que podría crea confusión o sobrecarga para la base de datos. 
-La parte de auto comparación es algo más avanzado en la base de datos que todavía no esta listo en la base de datos.
+**Fuera del alcance**
+|Numero| No permite | Por qué queda fuera |
+|---|---|---|
+|01| Compara prospectos automáticamente. | Requiere criterios de evaluación que todavía no están definidos. |
+|02| Genera reportes financieros o de nómina exportables. | Es responsabilidad de Contaduría y Finanzas, y mezclarlo sobrecargaría la base. |
+|03| Envía notificaciones automáticas por correo o SMS. | Requiere integrar servicios externos que no están contemplados en esta versión. |
 
 ---
 
@@ -97,7 +92,7 @@ El propósito de la base de datos es recopilar, organizar y recuperar toda la in
 
 **Por qué le conviene a este proyecto:**
 
-El proyecto tiene requisitos generales claros (registrar, clasificar, filtrar y dar seguimiento a prospectos y vacantes), pero conserva esa decisión de diseño abierta; también el control de acceso para las áreas de R.H., Contaduría/Finanzas y Corporativo. Un modelo ágil permite avanzar con lo que ya está definido y redefinir las reglas que ya están hechas, en lugar de borrar todo y hacerlo de nuevo.
+El proyecto tiene requisitos generales claros (registrar, clasificar, filtrar y dar seguimiento a prospectos y vacantes), pero conserva abierta una decisión de diseño: el control de acceso por área, es decir qué ve cada una de R.H., Contaduría/Finanzas y Corporativo. Un modelo ágil permite avanzar con lo que ya está definido y redefinir las reglas que ya están hechas, en lugar de borrar todo y hacerlo de nuevo.
 
 Además, se requieren entregas constantes en ciertas fechas, lo cual coincide naturalmente con ciclos cortos de trabajo y retroalimentación. La coordinación es mucho más fácil, y el riesgo del sistema es moderado, por lo que no se justifica la rigidez de un modelo secuencial.
 
