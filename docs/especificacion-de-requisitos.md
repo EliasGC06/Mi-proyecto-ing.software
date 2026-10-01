@@ -214,12 +214,21 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 
 | Fecha | Requisito | Qué cambió | Por qué |
 |---|---|---|---|
+| 30/09/2026 | RF-001 | Se unió el registro de prospecto y vacante y se agregó el campo "motivo de apertura" a la vacante. | La urgencia de una vacante depende de cómo se desocupó (P.5). |
+| 30/09/2026 | RF-002 | Se agregó el estatus "archivado" para el prospecto y la posibilidad de reabrir una vacante ocupada. | La Visión solo tenía tres estatus y no contemplaba la reapertura; la entrevista confirmó que los prospectos no contratados se archivan (P.12) y la ficha de dominio describe la vacante urgente que se cierra de golpe (P.4). |
+| 30/09/2026 | RF-003 | Se agregó archivar al prospecto que no termina su proceso y reutilizar su registro si vuelve a aplicar. | La entrevista confirmó que su información se conserva y se actualiza al volver a aplicar (P.10, P.12). |
+| 30/09/2026 | RF-003 y RNF-03 | La Visión permitía a RH eliminar datos sensibles; se sustituyó por archivado y se prohíbe el borrado físico. | Contradice lo confirmado en la entrevista: la información nunca se borra (P.10, P.12). |
+| 30/09/2026 | RF-008 | Se agregó consultar el historial profesional de un prospecto en un solo lugar. | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas (P.7, P.9). |
+| 30/09/2026 | RF-011 | Se registró que la visibilidad prioritaria de las vacantes urgentes para todas las áreas es un supuesto. | La entrevista no lo confirmó: las áreas interactúan "solo cuando es necesario" (P.4). |
+| 30/09/2026 | RF-012 | Se agregó señalar a Finanzas/Contaduría las vacantes reabiertas. | Hay que avisarles con urgencia cuando una vacante se reabre (P.4, P.8); como las notificaciones automáticas están fuera del alcance, se resuelve dentro del sistema. |
+| 30/09/2026 | RNF-01 a RNF-06 | Se definió una métrica para cada atributo de calidad (confidencialidad, integridad, usabilidad y trazabilidad). | La Visión nombraba los atributos pero sin nada medible. |
+| [FECHA] | [REQUISITO] | [CAMBIO HECHO A PARTIR DE LA REVISIÓN DE LA DUPLA] | Observación de la dupla: [QUÉ COMENTÓ] |
 
+## 8. Revisión de la dupla
 
-## Revisión de la dupla 
 | Campo | Elemento |
 |---|---|
-| Revisora| |
-| Fecha de revisión |  |
-| Observaciones recibidas |  |
-| Cambios realizados |  |
+| Revisora | [NOMBRE DE TU DUPLA] |
+| Fecha de revisión | [DD/MM/2026] |
+| Observaciones recibidas | 1. [Requisito o sección]: [qué comentó] <br> 2. [Requisito o sección]: [qué comentó] |
+| Cambios realizados | 1. [Qué cambiaste por la observación 1] <br> 2. [Qué cambiaste por la observación 2, o por qué decidiste no cambiarlo] |
