@@ -188,7 +188,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 |RNF-03|Integridad|Cero registros de prospecto eliminados físicamente: toda baja se hace por archivado y se conservan sus datos y documentos. | Confirmado (P10, P12)| Alta | La información de un prospecto nunca se borra, porque puede volver a aplicar y RH necesita su historial.| RF-03, CU-01, CU-08|
 |RNF-04|Usabilidad|Una persona de RH que no haya usado el sistema debe registrar un prospecto completo en 3 minutos o menos, sin capacitación. Se prueba con 3 personas.|Visión (usabilidad)|Alta|Si el sistema es más lento que Excel o WhatsApp, RH regresa al método anterior y el sistema fracasa.|RF-01, RF-07, RF-08, CU-01|
 |RNF-05|Usabilidad|Encontrar el historial de un prospecto debe tomar 30 segundos o menos y 3 clics como máximo. | Confirmado (P7, P9)| Alta | Buscar archivo por archivo es el mayor dolor reportado por RH y lo que más tiempo le quita.|RF-08, CU-04|
-|RNF-05|Trazabilidad|El 100% de los cambios de estatus y de datos sensibles debe registrar usuario, fecha y hora. | Visión (Corporativo teme falta de transparencia)| Media | Permite saber quién cambió qué y cuándo, y evita incongruencias entre áreas.|RF-09, RF-10, RF-12, CU-03, CU-07, CU-08|
+|RNF-06|Trazabilidad|El 100% de los cambios de estatus y de datos sensibles debe registrar usuario, fecha y hora. | Visión (Corporativo teme falta de transparencia)| Media | Permite saber quién cambió qué y cuándo, y evita incongruencias entre áreas.|RF-09, RF-10, RF-12, CU-03, CU-07, CU-08|
 
 
 ## 5. Casos de uso
