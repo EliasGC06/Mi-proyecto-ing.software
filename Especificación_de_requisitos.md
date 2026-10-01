@@ -322,7 +322,7 @@ Esta tabla es la que hace posible el análisis de impacto de la semana 15. Mante
 | 0.1 | 30/09/2026 | RF-16 baja a prioridad Media y queda como supuesto: la entrevista no lo confirmó |
 
 ## Revisión de la dupla 
-| Campo| Detalle |
+| Campo | Elemento |
 |---|---|
 | Revisora| |
 | Fecha de revisión |  |
