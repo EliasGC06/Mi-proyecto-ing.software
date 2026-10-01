@@ -183,13 +183,12 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 
 |ID|Atributo de calidad|Descripción Métrica|Origen|Prioridad|Por qué importa|Afecta a|
 |---|---|---|---|---|---|---|
-|RNF-01|Confidencialidad|El 100% de los intentos de un usuario sin rol RH por ver o editar datos sensibles (problemas médicos, comentarios internos) debe ser rechazado. Se verifica con pruebas de los tres roles.| Visión (atributo de confidencialidad)| Alta | Son datos de salud y comentarios internos; una filtración daña a la persona y genera riesgo legal, por eso no admite excepciones.|RF-10, RF-09, CU-01, CU-04, CU-06|
-|RNF-02|Integridad|Un cambio de estatus de una vacante o prospecto debe ser visible para los tres roles en 5 segundos o menos.| Entrevista (P8 y ficha de dominio: respuestas desactualizadas a Contaduría); Visión (integridad)|Alta| Hoy Contaduría recibe respuestas desactualizadas porque la información no se sincroniza entre áreas; con 5 segundos el problema desaparece en la práctica.|RF-09, RF-12, CU-03, CU-06, CU-07|
-|RNF-03|Integridad|Cero registros de prospecto eliminados físicamente: toda baja se hace por archivado y se conservan sus datos y documentos. | Confirmado (P10, P12)| Alta | La información de un prospecto nunca se borra, porque puede volver a aplicar y RH necesita su historial.| RF-03, CU-01, CU-08|
-|RNF-04|Usabilidad|Una persona de RH que no haya usado el sistema debe registrar un prospecto completo en 3 minutos o menos, sin capacitación. Se prueba con 3 personas.|Visión (usabilidad)|Alta|Si el sistema es más lento que Excel o WhatsApp, RH regresa al método anterior y el sistema fracasa.|RF-01, RF-07, RF-08, CU-01|
-|RNF-05|Usabilidad|Encontrar el historial de un prospecto debe tomar 30 segundos o menos y 3 clics como máximo. | Confirmado (P7, P9)| Alta | Buscar archivo por archivo es el mayor dolor reportado por RH y lo que más tiempo le quita.|RF-08, CU-04|
-|RNF-06|Trazabilidad|El 100% de los cambios de estatus y de datos sensibles debe registrar usuario, fecha y hora. | Visión (Corporativo teme falta de transparencia)| Media | Permite saber quién cambió qué y cuándo, y evita incongruencias entre áreas.|RF-09, RF-10, RF-12, CU-03, CU-07, CU-08|
-
+|RNF-01|Confidencialidad|El 100% de los intentos de un usuario sin rol RH por ver o editar datos sensibles (problemas médicos, comentarios internos) debe ser rechazado. Se verifica con pruebas de los tres roles.| Visión (atributo de confidencialidad)| Alta | Son datos de salud y comentarios internos; una filtración daña a la persona y genera riesgo legal, por eso no admite excepciones.|RF-009, RF-010, CU-01, CU-04, CU-06 |
+|RNF-02|Integridad|Un cambio de estatus de una vacante o prospecto debe ser visible para los tres roles en 5 segundos o menos.| Entrevista (P8 y ficha de dominio: respuestas desactualizadas a Contaduría); Visión (integridad)|Alta| Hoy Contaduría recibe respuestas desactualizadas porque la información no se sincroniza entre áreas; con 5 segundos el problema desaparece en la práctica.| RF-002, RF-012, CU-03, CU-06, CU-07 |
+|RNF-03|Integridad|Cero registros de prospecto eliminados físicamente: toda baja se hace por archivado y se conservan sus datos y documentos. | Confirmado (P10, P12)| Alta | La información de un prospecto nunca se borra, porque puede volver a aplicar y RH necesita su historial.| RF-003, CU-01, CU-08 |
+|RNF-04|Usabilidad|Una persona de RH que no haya usado el sistema debe registrar un prospecto completo en 3 minutos o menos, sin capacitación. Se prueba con 3 personas.|Visión (usabilidad)|Alta|Si el sistema es más lento que Excel o WhatsApp, RH regresa al método anterior y el sistema fracasa.|RF-001, RF-004, CU-01 |
+|RNF-05|Usabilidad|Encontrar el historial de un prospecto debe tomar 30 segundos o menos y 3 clics como máximo. | Confirmado (P7, P9)| Alta | Buscar archivo por archivo es el mayor dolor reportado por RH y lo que más tiempo le quita.|RF-008, CU-04 |
+|RNF-06|Trazabilidad|El 100% de los cambios de estatus y de datos sensibles debe registrar usuario, fecha y hora. | Visión (Corporativo teme falta de transparencia)| Media | Permite saber quién cambió qué y cuándo, y evita incongruencias entre áreas.|RF-002, RF-010, CU-03, CU-07, CU-08 |
 
 ## 5. Casos de uso
 
@@ -213,24 +212,18 @@ Esta tabla es la que hace posible el análisis de impacto de la semana 15. Mante
 
 | Requisito | Origen | Caso de uso | Elemento del prototipo |
 |---|---|---|---|
-| RF-01 | Visión | CU-01 | — |
-| RF-02 | Visión, P5 | CU-02 | — |
-| RF-03 | Visión, P12 | CU-01, CU-03, CU-08 | P4, P5 |
-| RF-04 | Visión | CU-02, CU-03, CU-07 | P1, P2, P5 |
-| RF-05 | P10, P12 | CU-08 | — |
-| RF-06 | P10 | CU-01 | — |
-| RF-07, RF-08 | Visión | CU-01, CU-02 | — |
-| RF-09 | P11 | CU-03 | P6 (flujo alterno) |
-| RF-10 | Visión | CU-05 | P1 |
-| RF-11 | Visión | CU-05, CU-03 | P3 |
-| RF-12 | Visión | CU-01, CU-04 | — |
-| RF-13 | P7, P9 | CU-04 | — |
-| RF-14 | Visión | CU-06 | P7 |
-| RF-15 | Visión | CU-01, CU-04 | P7 |
-| RF-16 | Visión | CU-05, CU-06 | P1 |
-| RF-17 | Ficha, P4, P8 | CU-07 | — |
-| RF-18 | P4, P8 | CU-07 | — |
-| RF-19 | Derivado | Transversal | — |
+| RF-001 | Visión (alcance 1 y 2), P5 | CU-01, CU-02 | — |
+| RF-002 | Visión (alcance 3), P12, P4 | CU-02, CU-03, CU-07, CU-08 | P4, P5 |
+| RF-003 | P10, P12 | CU-01, CU-08 | P3 |
+| RF-004 | Visión (alcance 4) | CU-01, CU-02 | — |
+| RF-005 | P11 | CU-03 | P6 |
+| RF-006 | Visión (alcance 5) | CU-03, CU-05 | P1, P3 |
+| RF-007 | Visión (alcance 6) | CU-01, CU-04 | — |
+| RF-008 | P7, P9 | CU-04 | — |
+| RF-009 | Visión (resolución del conflicto) | CU-06 | P7 |
+| RF-010 | Visión (regla 2) | CU-01, CU-04 | P7 |
+| RF-011 | P8 (supuesto) | CU-05, CU-06 | P1, P7 |
+| RF-012 | P4, P8 | CU-06, CU-07 | P7 |
 
 
 ## 7. Registro de cambios
