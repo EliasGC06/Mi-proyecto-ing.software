@@ -65,7 +65,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 1 y 2). El campo "motivo de apertura" está Confirmado (P5). |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un usuario RH autenticado, cuando captura todos los campos de un prospecto y guarda, entonces aparece en el listado con estatus "prospecto"; cuando captura todos los campos de una vacante y guarda, entonces aparece en el listado con estatus "disponible" y su nivel de urgencia. |
-| Relacionado con | CU-001, CU-002 · RF-002, RF-004 |
+| Relacionado con | CU-001, CU-002, RF-002, RF-004 |
  
 ## RF-002 · Mantener estatus del prospecto y de la vacante
  
@@ -75,7 +75,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 3). El estatus "archivado" está Confirmado (P12) y la reapertura de vacantes viene de la excepción de la ficha de dominio (P4). |
 | Prioridad | Alta |
 | Criterio de aceptación | Todo prospecto y toda vacante guardados tienen un solo estatus válido; cuando RH reabre una vacante ocupada e indica el motivo, su estatus pasa a "disponible", conserva su urgencia y se registra usuario, fecha y motivo. |
-| Relacionado con | CU-003, CU-007, CU-008 · RF-003, RF-012 · RNF-003, RNF-009 |
+| Relacionado con | CU-003, CU-007, CU-008, RF-003, RF-012, RNF-003 |
  
 ## RF-003 · Archivar prospecto que no termina su proceso y reutilizar su registro
  
@@ -85,7 +85,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Confirmado (P10, P12) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un prospecto "en proceso" que RH descarta, cuando RH confirma, entonces su estatus es "archivado" y sus datos y documentos siguen consultables; cuando RH registra a una persona que ya tiene un registro archivado, el sistema le muestra ese registro y le permite reactivarlo en lugar de crear uno nuevo. |
-| Relacionado con | CU-008, CU-001 · RF-002, RF-008 · RNF-004 |
+| Relacionado con | CU-008, CU-001, RF-002, RF-008, RNF-03, RNF-05|
  
 ## RF-004 · Validar campos obligatorios, formato de teléfono y correo
  
@@ -95,7 +95,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 4) |
 | Prioridad | Alta |
 | Criterio de aceptación | Cuando RH guarda con un campo obligatorio vacío, con teléfono "55123" o con correo "juan@", el sistema no guarda, marca cada campo con error e indica el formato esperado. |
-| Relacionado con | CU-001, CU-002 · RF-001 · RNF-005 |
+| Relacionado con | CU-001, CU-002, RF-001, RNF-05 |
  
 ## RF-005 · Impedir que un prospecto esté activo en dos vacantes
  
@@ -105,7 +105,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Confirmado (P11) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un prospecto "en proceso" en la vacante A, cuando RH intenta asignarlo a la vacante B, el sistema rechaza la asignación, indica que está activo en la vacante A y el prospecto sigue ligado solo a A. |
-| Relacionado con | CU-003 · RF-002 |
+| Relacionado con | CU-003, RF-002, RNF-02 |
  
 ## RF-006 · Filtrar vacantes y prospectos
  
@@ -115,7 +115,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 5) |
 | Prioridad | Alta |
 | Criterio de aceptación | Con uno o más filtros aplicados en cualquiera de los dos listados, solo aparecen los registros que cumplen todos los filtros. |
-| Relacionado con | CU-005, CU-003 · RNF-007 |
+| Relacionado con | CU-005, CU-003 |
  
 ## RF-007 · Adjuntar documentos a un prospecto
  
@@ -125,7 +125,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 6). El formato y el tamaño son propuesta. |
 | Prioridad | Media |
 | Criterio de aceptación | Cuando RH adjunta un PDF de 2 MB, aparece en los documentos del prospecto con nombre y fecha; un archivo de 15 MB es rechazado con un mensaje. |
-| Relacionado con | CU-001, CU-004 · RF-008 |
+| Relacionado con | CU-001, CU-004, RF-001, RF-002, RF-008, RNF-05 |
  
 ## RF-008 · Consultar el historial profesional de un prospecto en un solo lugar
  
@@ -135,7 +135,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Confirmado (P7, P9) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un prospecto que aplicó hace seis meses, cuando RH lo busca por nombre y abre su registro, ve en una sola pantalla sus datos, sus documentos y las vacantes a las que aplicó, con fechas. |
-| Relacionado con | CU-004 · RF-003, RF-007 · RNF-006 |
+| Relacionado con | CU-004, RF-003, RF-007, RNF-05 |
  
 ## RF-009 · Limitar lo que ven Finanzas/Contaduría y Corporativo
  
@@ -145,7 +145,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, resolución del conflicto) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un usuario de Finanzas/Contaduría o Corporativo, cuando abre una vacante o un prospecto, ve solo estatus, puesto y urgencia; no ve documentos ni datos sensibles. |
-| Relacionado con | CU-006 · RF-010 · RNF-001 |
+| Relacionado con | CU-006, RF-010, RNF-01, RNF-05 |
  
 ## RF-010 · Reservar los datos sensibles a RH
  
@@ -155,7 +155,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, regla 2) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un usuario sin rol RH, cuando intenta abrir o editar esos campos, el sistema no los muestra y rechaza la edición. |
-| Relacionado con | CU-001, CU-004 · RF-009 · RNF-001, RNF-009 |
+| Relacionado con | CU-001, CU-004, RF-001, RNF-001, RNF-005 |
  
 ## RF-011 · Mostrar las vacantes urgentes con prioridad
  
@@ -165,7 +165,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | P8. Supuesto: la visibilidad prioritaria para todas las áreas no se confirmó en la entrevista. |
 | Prioridad | Alta |
 | Criterio de aceptación | En el listado de vacantes de cualquier rol, las vacantes urgentes aparecen en las primeras posiciones con la etiqueta "Urgente". |
-| Relacionado con | CU-005, CU-006 · RF-006 |
+| Relacionado con | CU-005, CU-006, RF-006 |
  
 ## RF-012 · Señalar las vacantes reabiertas a Finanzas/Contaduría
  
@@ -175,7 +175,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Confirmado (P4, P8) la necesidad de avisar a Finanzas. Supuesto que sea mediante una sección en el sistema, porque las notificaciones automáticas están fuera del alcance. |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado una vacante reabierta hoy, cuando un usuario de Finanzas/Contaduría abre su pantalla de inicio, la ve en "Reabiertas recientes" con fecha y hora de reapertura. |
-| Relacionado con | CU-007 · RF-002 · RNF-003 |
+| Relacionado con | CU-007, RF-002, RNF-002 |
 
 ## 4. Requisitos no funcionales
 
