@@ -40,25 +40,19 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 ### 3.1 
 | ID | Nombre | Prioridad | Origen |
 |---|---|---|---|
-| RF-001 | Registrar prospecto | Alta | Supuesto (Visión, alcance 1) |
-| RF-002 | Registrar vacante | Alta | Supuesto (Visión, alcance 2) + Confirmado (P5) |
-| RF-003 | Mantener estatus del prospecto | Alta | Supuesto (Visión, alcance 3) + Confirmado (P12) |
-| RF-004 | Mantener estatus de la vacante | Alta | Supuesto (Visión, alcance 3) |
-| RF-005 | Archivar prospecto que no avanza | Alta | Confirmado (P10, P12) |
-| RF-006 | Reutilizar el registro de un prospecto que vuelve a aplicar | Alta | Confirmado (P10) + Supuesto (mecanismo) |
-| RF-007 | Validar campos obligatorios | Alta | Supuesto (Visión, alcance 4) |
-| RF-008 | Validar formato de teléfono y correo | Media | Supuesto (Visión, alcance 4) |
-| RF-009 | Impedir que un prospecto esté activo en dos vacantes | Alta | Confirmado (P11) |
-| RF-010 | Filtrar vacantes | Media | Supuesto (Visión, alcance 5) |
-| RF-011 | Filtrar prospectos | Media | Supuesto (Visión, alcance 5) |
-| RF-012 | Adjuntar documentos a un prospecto | Media | Supuesto (Visión, alcance 6) |
-| RF-013 | Consultar el historial de un prospecto en una sola pantalla | Alta | Confirmado (P7, P9) |
-| RF-014 | Limitar lo que ven Finanzas, Contaduría y Corporativo | Alta | Supuesto (Visión, resolución del conflicto) |
-| RF-015 | Reservar los datos sensibles a RH | Alta | Supuesto (Visión, regla 2) |
-| RF-016 | Mostrar vacantes urgentes con prioridad | Media (pendiente de validar) | Supuesto (no confirmado en la entrevista) |
-| RF-017 | Reabrir una vacante ocupada | Alta | Confirmado (ficha de dominio; P4, P8) |
-| RF-018 | Señalar las vacantes reabiertas a Finanzas y Contaduría | Alta | Confirmado (P4, P8) + Supuesto (mecanismo) |
-| RF-019 | Autenticar usuarios con un rol | Alta | Derivado de RF-014 y RF-015 |
+| RF-001 | Registrar prospecto y vacante | Alta | Visión (alcance 1 y 2) y P5 |
+| RF-002 | Mantener estatus del prospecto, si no termina su proceso, y la vacante | Alta | Visión (alcance 3) y P12 |
+| RF-003 | Archivar prospecto que no termina su proceso, para usar su registro en un futuro, si vuelve a aplicar | Alta | P10 y P12 |
+| RF-004 | Validar campos obligatorios, formato de teléfono y correo | Alta | Visión (alcance 4) |
+| RF-005 | Impedir que un prospecto esté activo en dos vacantes | Alta | P11 |
+| RF-006 | Filtrar vacantes y prospectos |Alta| Visión (alcance 5) |
+| RF-007 | Adjuntar documentos a un prospecto | Media | Visión (alcance 6) |
+| RF-008 | Consultar el historial profesional de un prospecto en una solo lugar| Alta | P7 y P9|
+| RF-009 | Limitar lo que ven Finanzas/Contaduría y Corporativo | Alta | Visión (resolución del conflicto) | 
+| RF-010 | Reservar los datos sensibles a RH | Alta | Visión (regla 2) |
+| RF-011 | Mostrar las vacantes urgentes con prioridad | Alta | P8 |
+| RF-012 | Señalar las vacantes reabiertas a Finanzas/Contaduría | Alta | P4, P8 |
+
 
 ### 3.2 Fichas 
 
@@ -316,10 +310,17 @@ Esta tabla es la que hace posible el análisis de impacto de la semana 15. Mante
 
 | Fecha | Requisito | Qué cambió | Por qué |
 |---|---|---|---|
-| 0.1 | 30/09/2026 | Primera versión, construida desde la Visión y la entrevista |
-| 0.1 | 30/09/2026 | Se agregan RF-05, RF-06, RF-13, RF-17 y RF-18, surgidos de la entrevista (P7, P9, P10, P12 y excepción de la ficha) |
-| 0.1 | 30/09/2026 | La Visión permitía a RH "eliminar" datos sensibles; se sustituye por archivado (RNF-04) según P10 y P12 |
-| 0.1 | 30/09/2026 | RF-16 baja a prioridad Media y queda como supuesto: la entrevista no lo confirmó |
+| 30/09/2026 | RF-05 | Se agregó "Archivar prospecto que no avanza" | La entrevista confirmó que la información de un prospecto nunca se borra, se archiva (P10, P12) | Sí |
+| 30/09/2026 | RF-06 | Se agregó "Reutilizar el registro de un prospecto que vuelve a aplicar" | La entrevista confirmó que si vuelve a aplicar se actualiza su registro con la información nueva (P10) |
+| 30/09/2026 | RF-13 | Se agregó "Consultar el historial de un prospecto en una sola pantalla" | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas (P7, P9) | 
+| 30/09/2026 | RF-17 | Se agregó "Reabrir una vacante ocupada" | La excepción de la ficha de dominio (vacante urgente que se cierra de golpe) no estaba en la Visión; se confirmó con P4 y P8 | 
+| 30/09/2026 | RF-18 | Se agregó "Señalar las vacantes reabiertas a Finanzas y Contaduría" | Hay que avisar con urgencia a Finanzas (P4, P8); como las notificaciones automáticas están fuera del alcance, se resuelve con una sección visible en el sistema | Sí |
+| 30/09/2026 | RF-03 | Se añadió el estatus "archivado" a los estatus del prospecto | La entrevista indicó que los prospectos no contratados se archivan (P12); la Visión solo tenía prospecto, en proceso y contratado | 
+| 30/09/2026 | RF-02 | Se agregó el campo "motivo de apertura" a la vacante | La urgencia depende de cómo se desocupó la vacante (P5) | Sí |
+| 30/09/2026 | RF-15 y RNF-04 | La Visión permitía a RH "eliminar" datos sensibles; se sustituyó por archivado y se prohíbe el borrado físico | Contradice lo confirmado en la entrevista: la información nunca se borra (P10, P12) | 
+| 30/09/2026 | RF-16 | La prioridad bajó de Alta a Media y quedó marcado como supuesto pendiente de validar | La entrevista no confirmó que las vacantes urgentes deban verse con prioridad para todas las áreas; P4 indica que las áreas interactúan solo cuando es necesario | 
+| 30/09/2026 | RF-19 | Se agregó "Autenticar usuarios con un rol" | Es necesario para poder cumplir RF-14 y RF-15 (visibilidad por área); no estaba en la Visión | Sí |
+| [FECHA] | [REQUISITO] | [CAMBIO A PARTIR DE LA REVISIÓN DE LA DUPLA] | [OBSERVACIÓN QUE LO MOTIVÓ] | 
 
 ## Revisión de la dupla 
 | Campo | Elemento |
