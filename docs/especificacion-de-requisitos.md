@@ -220,7 +220,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | 30/09/2026 | RF-003 y RNF-03 | La Visión permitía a RH eliminar datos sensibles; se sustituyó por archivado y se prohíbe el borrado físico. | Contradice lo confirmado en la entrevista: la información nunca se borra (P.10, P.12). |
 | 30/09/2026 | RF-008 | Se agregó consultar el historial profesional de un prospecto en un solo lugar. | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas de la entrevista (P.7, P.9). |
 | 30/09/2026 | RF-012 | Se agregó señalar a Finanzas/Contaduría las vacantes reabiertas. | Hay que avisarles con urgencia cuando una vacante se reabre (P.4, P.8); como las notificaciones automáticas están fuera del alcance, se resuelve dentro del sistema. |
-| 30/09/2026 | RNF-01 a RNF-06 | Se agrego una métrica a los atributos de calidad "trazabilidad". | La Visión nombraba solo 3 atributos, pero observo que faltaba uno que definiera los cambios que se hacen en el sistema y que queden registrado quien fue, cuando y en que parte del mismo. |
+| 01/10/2026 | RNF-01 a RNF-06 / Visión del producto | Se agrego una métrica a los atributos de calidad "trazabilidad". | La Visión nombraba solo 3 atributos, pero observo que faltaba uno que definiera los cambios que se hacen en el sistema y que queden registrado quien fue, cuando y en que parte del mismo. |
 
 ## 8. Revisión de la dupla
 
