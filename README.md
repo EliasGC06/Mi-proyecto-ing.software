@@ -5,7 +5,7 @@ Autor: Elias García Cisneros
 
 ## Entregables
 
-- Visión del producto: docs/vision-del-producto.md
+- Visión del producto: [docs/vision-del-producto.md](docs/vision-del-producto.md)
 - Guion de entrevista: [docs/guion-entrevista.md](docs/guion-entrevista.md)
 - Especificación de requisitos: [docs/especificacion-de-requisitos.md](docs/especificacion-de-requisitos.md)
 - Diagrama de casos de uso: [.drawio](docs/diagramas/casos-de-uso.drawio) y [.png](docs/diagramas/casos-de-uso.png)
