@@ -237,17 +237,7 @@ Esta tabla es la que hace posible el análisis de impacto de la semana 15. Mante
 
 | Fecha | Requisito | Qué cambió | Por qué |
 |---|---|---|---|
-| 30/09/2026 | RF-05 | Se agregó "Archivar prospecto que no avanza" | La entrevista confirmó que la información de un prospecto nunca se borra, se archiva (P10, P12) | Sí |
-| 30/09/2026 | RF-06 | Se agregó "Reutilizar el registro de un prospecto que vuelve a aplicar" | La entrevista confirmó que si vuelve a aplicar se actualiza su registro con la información nueva (P10) |
-| 30/09/2026 | RF-13 | Se agregó "Consultar el historial de un prospecto en una sola pantalla" | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas (P7, P9) | 
-| 30/09/2026 | RF-17 | Se agregó "Reabrir una vacante ocupada" | La excepción de la ficha de dominio (vacante urgente que se cierra de golpe) no estaba en la Visión; se confirmó con P4 y P8 | 
-| 30/09/2026 | RF-18 | Se agregó "Señalar las vacantes reabiertas a Finanzas y Contaduría" | Hay que avisar con urgencia a Finanzas (P4, P8); como las notificaciones automáticas están fuera del alcance, se resuelve con una sección visible en el sistema | Sí |
-| 30/09/2026 | RF-03 | Se añadió el estatus "archivado" a los estatus del prospecto | La entrevista indicó que los prospectos no contratados se archivan (P12); la Visión solo tenía prospecto, en proceso y contratado | 
-| 30/09/2026 | RF-02 | Se agregó el campo "motivo de apertura" a la vacante | La urgencia depende de cómo se desocupó la vacante (P5) | Sí |
-| 30/09/2026 | RF-15 y RNF-04 | La Visión permitía a RH "eliminar" datos sensibles; se sustituyó por archivado y se prohíbe el borrado físico | Contradice lo confirmado en la entrevista: la información nunca se borra (P10, P12) | 
-| 30/09/2026 | RF-16 | La prioridad bajó de Alta a Media y quedó marcado como supuesto pendiente de validar | La entrevista no confirmó que las vacantes urgentes deban verse con prioridad para todas las áreas; P4 indica que las áreas interactúan solo cuando es necesario | 
-| 30/09/2026 | RF-19 | Se agregó "Autenticar usuarios con un rol" | Es necesario para poder cumplir RF-14 y RF-15 (visibilidad por área); no estaba en la Visión | Sí |
-| [FECHA] | [REQUISITO] | [CAMBIO A PARTIR DE LA REVISIÓN DE LA DUPLA] | [OBSERVACIÓN QUE LO MOTIVÓ] | 
+
 
 ## Revisión de la dupla 
 | Campo | Elemento |
