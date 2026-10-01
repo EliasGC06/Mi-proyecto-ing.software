@@ -10,7 +10,8 @@ Fecha de la última actualización: 30/09/2026
 
 ## 1. Propósito y alcance
 
-Enlace Figma: 
+### Enlace Figma: 
+https://scope-hull-09512178.figma.site/
 
 Propósito del documento: En este documento se especifica lo que se hace y con que calidad debe tener el sistema que desarrollaremos para recopilar y concentrar la información de las vacantes, prospectos y personal activo de la empresa. Esté nace en base a la visión del producto que hicimos y la entrevista realizada.
 
