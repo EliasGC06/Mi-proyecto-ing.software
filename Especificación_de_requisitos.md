@@ -53,90 +53,51 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | RF-011 | Mostrar las vacantes urgentes con prioridad | Alta | P8 |
 | RF-012 | Señalar las vacantes reabiertas a Finanzas/Contaduría | Alta | P4, P8 |
 
-
 ### 3.2 Fichas 
 
 #### RF-001 - Registrar prospecto
  
+## RF-001 · Registrar prospecto y vacante
+ 
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe permitir a RH registrar un prospecto con nombre, edad, puesto, empresa, horario, localidad, escolaridad, teléfono y correo. |
-| Origen | Supuesto (Visión, alcance 1) |
+| Descripción | El sistema debe permitir a RH registrar prospectos con nombre, edad, puesto, empresa, horario, localidad, escolaridad, teléfono y correo, y vacantes con puesto, área, horario, localidad, nivel de urgencia y motivo de apertura. |
+| Origen | Supuesto (Visión, alcance 1 y 2). El campo "motivo de apertura" está Confirmado (P5). |
 | Prioridad | Alta |
-| Criterio de aceptación | Dado un usuario RH autenticado, cuando captura los nueve campos y guarda, entonces el prospecto aparece en el listado con estatus "prospecto". |
-| Relacionado con | CU-01 · RF-007, RF-008 |
+| Criterio de aceptación | Dado un usuario RH autenticado, cuando captura todos los campos de un prospecto y guarda, entonces aparece en el listado con estatus "prospecto"; cuando captura todos los campos de una vacante y guarda, entonces aparece en el listado con estatus "disponible" y su nivel de urgencia. |
+| Relacionado con | CU-001, CU-002 · RF-002, RF-004 |
  
-#### RF-002 - Registrar vacante
+## RF-002 · Mantener estatus del prospecto y de la vacante
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe permitir a RH registrar una vacante con puesto, área, horario, localidad, nivel de urgencia (normal o urgente) y motivo de apertura. |
-| Origen | Supuesto (Visión, alcance 2). El campo "motivo de apertura" y que RH decide la urgencia según puesto, tareas y forma en que se desocupó salen de P5 (Confirmado). |
+| Descripción | El sistema debe asignar a cada prospecto exactamente un estatus (prospecto, en proceso, contratado o archivado) y a cada vacante exactamente uno (disponible u ocupada), y permitir a RH reabrir una vacante ocupada. |
+| Origen | Supuesto (Visión, alcance 3). El estatus "archivado" está Confirmado (P12) y la reapertura de vacantes viene de la excepción de la ficha de dominio (P4). |
 | Prioridad | Alta |
-| Criterio de aceptación | Dado un usuario RH, cuando captura los seis campos y guarda, entonces la vacante aparece en el listado con estatus "disponible" y su nivel de urgencia. |
-| Relacionado con | CU-02 · RF-004, RF-007 |
+| Criterio de aceptación | Todo prospecto y toda vacante guardados tienen un solo estatus válido; cuando RH reabre una vacante ocupada e indica el motivo, su estatus pasa a "disponible", conserva su urgencia y se registra usuario, fecha y motivo. |
+| Relacionado con | CU-003, CU-007, CU-008 · RF-003, RF-012 · RNF-003, RNF-009 |
  
-#### RF-003 - Mantener estatus del prospecto
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe asignar a cada prospecto exactamente un estatus: prospecto, en proceso, contratado o archivado. |
-| Origen | Supuesto (Visión, alcance 3); el estatus "archivado" es Confirmado (P12) |
-| Prioridad | Alta |
-| Criterio de aceptación | Todo prospecto guardado tiene un estatus de los cuatro valores; el sistema no permite guardar un prospecto sin estatus ni con dos a la vez. |
-| Relacionado con | CU-01, CU-03, CU-08 |
- 
-#### RF-004 - Mantener estatus de la vacante
+## RF-003 · Archivar prospecto que no termina su proceso y reutilizar su registro
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe asignar a cada vacante exactamente un estatus: disponible u ocupada. |
-| Origen | Supuesto (Visión, alcance 3) |
-| Prioridad | Alta |
-| Criterio de aceptación | Toda vacante guardada tiene uno de los dos estatus; al cambiarlo, el nuevo valor se ve en el listado de inmediato. |
-| Relacionado con | CU-02, CU-03, CU-07 |
- 
-#### RF-005 - Archivar prospecto que no avanza
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe cambiar a estatus "archivado" a un prospecto que no avanza en el proceso, sin eliminar su información. |
+| Descripción | El sistema debe cambiar a "archivado" a un prospecto que no termina su proceso, sin eliminar su información, y reutilizar ese registro si vuelve a aplicar. |
 | Origen | Confirmado (P10, P12) |
 | Prioridad | Alta |
-| Criterio de aceptación | Dado un prospecto "en proceso" que RH descarta, cuando RH confirma, entonces su estatus es "archivado" y todos sus datos y documentos siguen consultables desde su historial. |
-| Relacionado con | CU-08 · RF-003, RF-013 |
+| Criterio de aceptación | Dado un prospecto "en proceso" que RH descarta, cuando RH confirma, entonces su estatus es "archivado" y sus datos y documentos siguen consultables; cuando RH registra a una persona que ya tiene un registro archivado, el sistema le muestra ese registro y le permite reactivarlo en lugar de crear uno nuevo. |
+| Relacionado con | CU-008, CU-001 · RF-002, RF-008 · RNF-004 |
  
-#### RF-006 - Reutilizar el registro de un prospecto que vuelve a aplicar
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe actualizar el registro existente de un prospecto archivado cuando vuelve a aplicar, en lugar de crear uno nuevo. |
-| Origen | Confirmado el comportamiento (P10). Supuesto el mecanismo de detección (por correo o teléfono). |
-| Prioridad | Alta |
-| Criterio de aceptación | Dado un prospecto archivado con correo X, cuando RH registra a una persona con correo X, entonces el sistema ofrece reactivar el registro existente, conserva su historial y no crea un segundo registro. |
-| Relacionado con | CU-01 · RF-005 |
- 
-#### RF-007 - Validar campos obligatorios
+## RF-004 · Validar campos obligatorios, formato de teléfono y correo
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe impedir guardar un registro de prospecto o vacante que tenga algún campo obligatorio vacío. |
+| Descripción | El sistema debe impedir guardar un registro con campos obligatorios vacíos, con un teléfono que no tenga 10 dígitos o con un correo sin formato válido. |
 | Origen | Supuesto (Visión, alcance 4) |
 | Prioridad | Alta |
-| Criterio de aceptación | Cuando RH guarda con al menos un campo obligatorio vacío, el sistema no guarda y marca cada campo faltante. |
-| Relacionado con | CU-01, CU-02 |
+| Criterio de aceptación | Cuando RH guarda con un campo obligatorio vacío, con teléfono "55123" o con correo "juan@", el sistema no guarda, marca cada campo con error e indica el formato esperado. |
+| Relacionado con | CU-001, CU-002 · RF-001 · RNF-005 |
  
-#### RF-008 - Validar formato de teléfono y correo
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe rechazar teléfonos que no tengan 10 dígitos y correos sin formato válido. |
-| Origen | Supuesto (Visión, alcance 4) |
-| Prioridad | Media |
-| Criterio de aceptación | Cuando RH captura "55123" como teléfono o "juan@" como correo, el sistema no guarda e indica el formato esperado. |
-| Relacionado con | CU-01 |
- 
-#### RF-009 - Impedir que un prospecto esté activo en dos vacantes
+## RF-005 · Impedir que un prospecto esté activo en dos vacantes
  
 | Campo | Contenido |
 |---|---|
@@ -144,108 +105,77 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Confirmado (P11) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un prospecto "en proceso" en la vacante A, cuando RH intenta asignarlo a la vacante B, el sistema rechaza la asignación, indica que está activo en la vacante A y el prospecto sigue ligado solo a A. |
-| Relacionado con | CU-03 · RF-003 |
+| Relacionado con | CU-003 · RF-002 |
  
-#### RF-010 - Filtrar vacantes
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe filtrar el listado de vacantes por puesto, urgencia, localidad y estatus. |
-| Origen | Supuesto (Visión, alcance 5) |
-| Prioridad | Media |
-| Criterio de aceptación | Con uno o más filtros aplicados, el listado muestra solo las vacantes que cumplen todos. |
-| Relacionado con | CU-05 |
- 
-#### RF-011 - Filtrar prospectos
+## RF-006 · Filtrar vacantes y prospectos
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe filtrar el listado de prospectos por puesto, urgencia de la vacante, localidad y estatus. |
+| Descripción | El sistema debe filtrar los listados de vacantes y de prospectos por puesto, urgencia, localidad y estatus. |
 | Origen | Supuesto (Visión, alcance 5) |
-| Prioridad | Media |
-| Criterio de aceptación | Con uno o más filtros aplicados, el listado muestra solo los prospectos que cumplen todos. |
-| Relacionado con | CU-05, CU-03 |
+| Prioridad | Alta |
+| Criterio de aceptación | Con uno o más filtros aplicados en cualquiera de los dos listados, solo aparecen los registros que cumplen todos los filtros. |
+| Relacionado con | CU-005, CU-003 · RNF-007 |
  
-#### RF-012 - Adjuntar documentos a un prospecto
+## RF-007 · Adjuntar documentos a un prospecto
  
 | Campo | Contenido |
 |---|---|
 | Descripción | El sistema debe permitir a RH adjuntar documentos PDF, JPG o PNG de hasta 10 MB a un prospecto. |
 | Origen | Supuesto (Visión, alcance 6). El formato y el tamaño son propuesta. |
 | Prioridad | Media |
-| Criterio de aceptación | Cuando RH adjunta un PDF de 2 MB, este aparece en los documentos del prospecto con nombre y fecha; un archivo de 15 MB es rechazado con mensaje. |
-| Relacionado con | CU-01, CU-04 |
+| Criterio de aceptación | Cuando RH adjunta un PDF de 2 MB, aparece en los documentos del prospecto con nombre y fecha; un archivo de 15 MB es rechazado con un mensaje. |
+| Relacionado con | CU-001, CU-004 · RF-008 |
  
-#### RF-013 - Consultar el historial de un prospecto en una sola pantalla
+## RF-008 · Consultar el historial profesional de un prospecto en un solo lugar
  
 | Campo | Contenido |
 |---|---|
 | Descripción | El sistema debe mostrar en una sola pantalla los datos, documentos y vacantes anteriores de un prospecto, incluso si aplicó hace meses. |
-| Origen | Confirmado (P7, P9: es el mayor dolor actual) |
+| Origen | Confirmado (P7, P9) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un prospecto que aplicó hace seis meses, cuando RH lo busca por nombre y abre su registro, ve en una sola pantalla sus datos, sus documentos y las vacantes a las que aplicó, con fechas. |
-| Relacionado con | CU-04 · RF-005, RF-006 |
+| Relacionado con | CU-004 · RF-003, RF-007 · RNF-006 |
  
-#### RF-014 - Limitar lo que ven Finanzas, Contaduría y Corporativo
+## RF-009 · Limitar lo que ven Finanzas/Contaduría y Corporativo
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe mostrar a los usuarios de Finanzas, Contaduría y Corporativo únicamente estatus, puesto y urgencia. |
-| Origen | Supuesto (Visión, resolución del conflicto; regla 2 de la ficha no verificada en entrevista) |
+| Descripción | El sistema debe mostrar a los usuarios de Finanzas/Contaduría y Corporativo únicamente estatus, puesto y urgencia. |
+| Origen | Supuesto (Visión, resolución del conflicto) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un usuario de Finanzas/Contaduría o Corporativo, cuando abre una vacante o un prospecto, ve solo estatus, puesto y urgencia; no ve documentos ni datos sensibles. |
-| Relacionado con | CU-06 · RF-015, RF-019 |
+| Relacionado con | CU-006 · RF-010 · RNF-001 |
  
-#### RF-015 - Reservar los datos sensibles a RH
+## RF-010 · Reservar los datos sensibles a RH
  
 | Campo | Contenido |
 |---|---|
 | Descripción | El sistema debe permitir ver y editar los campos "problemas médicos" y "comentarios internos" solo a usuarios RH. |
-| Origen | Supuesto (Visión, regla 2; no verificado en entrevista) |
+| Origen | Supuesto (Visión, regla 2) |
 | Prioridad | Alta |
 | Criterio de aceptación | Dado un usuario sin rol RH, cuando intenta abrir o editar esos campos, el sistema no los muestra y rechaza la edición. |
-| Relacionado con | CU-01, CU-04 · RF-014, RF-019 |
+| Relacionado con | CU-001, CU-004 · RF-009 · RNF-001, RNF-009 |
  
-#### RF-016 - Mostrar vacantes urgentes con prioridad
+## RF-011 · Mostrar las vacantes urgentes con prioridad
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe mostrar las vacantes urgentes antes que las demás y con indicador visual, para los tres roles. |
-| Origen | Supuesto. La entrevista no lo confirmó (P4: las áreas interactúan "solo cuando es necesario"). |
-| Prioridad | Media (pendiente de validar) |
+| Descripción | El sistema debe mostrar las vacantes urgentes antes que las demás y con una etiqueta "Urgente" para todas las áreas. |
+| Origen | P8. Supuesto: la visibilidad prioritaria para todas las áreas no se confirmó en la entrevista. |
+| Prioridad | Alta |
 | Criterio de aceptación | En el listado de vacantes de cualquier rol, las vacantes urgentes aparecen en las primeras posiciones con la etiqueta "Urgente". |
-| Relacionado con | CU-05, CU-06 |
+| Relacionado con | CU-005, CU-006 · RF-006 |
  
-#### RF-017 - Reabrir una vacante ocupada
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe permitir a RH cambiar una vacante ocupada a disponible, registrando el motivo. |
-| Origen | Confirmado (ficha de dominio, excepción; P4, P8). No estaba en la Visión. |
-| Prioridad | Alta |
-| Criterio de aceptación | Dada una vacante ocupada, cuando RH la reabre e indica el motivo, su estatus pasa a "disponible", conserva su nivel de urgencia y queda registrado usuario, fecha y motivo. |
-| Relacionado con | CU-07 · RF-004, RF-018 |
- 
-#### RF-018 - Señalar las vacantes reabiertas a Finanzas y Contaduría
+## RF-012 · Señalar las vacantes reabiertas a Finanzas/Contaduría
  
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe mostrar a Finanzas y Contaduría, al iniciar sesión, las vacantes reabiertas en las últimas 24 horas. |
-| Origen | La necesidad de avisar con urgencia a Finanzas es Confirmada (P4, P8). El mecanismo es Supuesto, porque las notificaciones automáticas están fuera del alcance. |
+| Descripción | El sistema debe mostrar a Finanzas/Contaduría, al iniciar sesión, las vacantes reabiertas en las últimas 24 horas. |
+| Origen | Confirmado (P4, P8) la necesidad de avisar a Finanzas. Supuesto que sea mediante una sección en el sistema, porque las notificaciones automáticas están fuera del alcance. |
 | Prioridad | Alta |
-| Criterio de aceptación | Dada una vacante reabierta hoy, cuando un usuario de Finanzas/Contaduría abre su pantalla de inicio, la ve en "Reabiertas recientes" con fecha y hora de reapertura. |
-| Relacionado con | CU-07 · RF-017 |
- 
-#### RF-019 - Autenticar usuarios con un rol
- 
-| Campo | Contenido |
-|---|---|
-| Descripción | El sistema debe permitir el acceso solo a usuarios con credenciales válidas y un único rol: RH, Finanzas/Contaduría o Corporativo. |
-| Origen | Derivado de RF-014 y RF-015 |
-| Prioridad | Alta |
-| Criterio de aceptación | Cuando alguien intenta entrar con credenciales inválidas, no ve ningún dato del sistema. |
-| Relacionado con | Transversal a todos los CU · RF-014, RF-015 |
-
+| Criterio de aceptación | Dado una vacante reabierta hoy, cuando un usuario de Finanzas/Contaduría abre su pantalla de inicio, la ve en "Reabiertas recientes" con fecha y hora de reapertura. |
+| Relacionado con | CU-007 · RF-002 · RNF-003 |
 
 ## 4. Requisitos no funcionales
 
