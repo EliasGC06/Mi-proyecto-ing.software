@@ -32,7 +32,8 @@ Fuera del alcance:
 | Finanzas/Contaduría | Pregunta que vacantes ya están ocupadas y por quien, en lo cual recopila sus datos o documentos (Numero de cuenta, banco, adeudos importantes como INFONAVIT O FONACOT), también si un empleado renuncia, para cerrar su nomina y verificar que le deben dar de finiquito o no. | Consultar el estatus de las vacantes en tiempo real en un solo lugar. |
 | Corporativo | Supervisa, coordina y comunica con R.H sobre las vacantes, prospectos y empleados que tiene la empresa, preguntando en persona sobre su estatus de cada uno; quitando mucho tiempo y esfuerzo. | Supervisar el estatus de todo el personal en una sola plataforma, viendo con claridad y transparencia lo que su cede con cada uno sin tener que preguntar al área de R.H. |
 
-**Conflictos identificados entre usuarios:**
+### Conflictos identificados entre usuarios:
+
 Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos sensibles (problemas médicos, comentarios internos, temas familiares) solo los puede ver R.H, como se confirmo en la entrevista, la visibilidad por área, las demás áreas que no son R.H ven únicamente estatus, puesto y urgencia. 
 
 ## 3. Requisitos funcionales
