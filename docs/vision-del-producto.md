@@ -77,6 +77,7 @@ El propósito de la base de datos es recopilar, organizar y recuperar toda la in
 |Confidencialidad |Se registran datos personales de las personas (salud, contactos, comentarios internos), las cuales no se pueden ver todas las áreas. |Filtración de información sensible, posible daño a su integridad y reputación de la persona, además puede resultar en un problema legal. |
 |Integridad |Varias áreas ven la misma información, por lo cual si un dato es incorrecto o se duplica, se puede hacer una serie da desinformación y malas decisiones. | Confusiones entre áreas. |
 |Usabilidad |El área de RH necesita ser más rápido y eficiente al capturar los datos, y hacer un sistema el cual sea fácil de usar sin saber mucho de tecnología.  |Se regresa al sistema anterior, lo cual seria un paso para atrás en la eficiencia de la empresa.  |
+| Trazabilidad | Si se hace un cambio dentro del sistema sobre la información de una vacante, prospecto o usuario; debe ser registrado por usuario, fecha y hora. Esto evita incongruencias con las otras áreas. | Se pueden crear incongruencias entre las áreas, haciendo más problemas y confusiones en el sistema, regresando a uno de los problemas principales por el cual se hizo el sistema. | 
 
 **Reglas de negocio que ya identifiqué:**
 
