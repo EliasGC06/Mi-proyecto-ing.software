@@ -2,157 +2,356 @@
 
 ## Plantilla del curso · Ingeniería de Software I · SIS3407 
 
-Sistema: 
+Sistema: Base de Datos de vacantes y prospectos R.H.
 
-Autor: 
+Autor: Elias García Cisneros
 
-Versión: 
+Versión: 0.1 
 
-Fecha de la última actualización:
+Fecha de la última actualización: 30/09/2026
 
 ## 1. Propósito y alcance
 
-Para qué existe este documento y a quién va dirigido. 
+Enlace Figma: 
 
-El alcance se retoma de la Visión del producto, no se reinventa. 
+Propósito del documento: En este documento se especifica lo que se hace y con que calidad debe tener el sistema que desarrollaremos para recopilar y concentrar la información de las vacantes, prospectos y personal activo de la empresa. Esté nace en base a la visión del producto que hicimos y la entrevista realizada.
 
-Si cambió, corrígelo también allá.
-
-Propósito del documento:
-
-Alcance del sistema:
+Alcance del sistema: Registrar prospectos según su vacante, darles un estatus, verificar sus datos, filtrar la información, adjuntar y consultar sus documentos, ver el historial profesional del prospecto, restringir la información sensible a las otras áreas y mostrar con prioridad las vacantes urgentes.   
 
 Fuera del alcance:
 
+| Fuera | Por qué |
+|---|---|
+| Comparar prospectos automáticamente. | No hay criterios de evaluación definidos |
+| Reportes financieros o de nómina. | Este tema lo manejaría Contaduría/Finanzas especificamente, confirmado en la entrevista (pregunta 13) |
+| Notificaciones automáticas por correo o SMS. | Requiere un desarrollo más extenso no contemplado para esta versión. | 
+
 ## 2. Usuarios y su contexto
 
-Se enriquece con lo que salga de la entrevista de elicitación. 
+| Usuario | Qué hace hoy sin el sistema | Qué espera del sistema | 
+|---|---|---|
+| Recursos Humanos | Gestiona de 5 a 10 vacantes activas a la vez, de distintas empresas, horarios, zonas y etapas. Buscando archivo por archivo lo que necesita y hablando temas con otras áreas en persona, perdiendo tiempo y esfuerzo. | Registrar, asignar, dar seguimiento y encontrar el historial de un prospecto en un solo lugar. |
+| Finanzas/Contaduría | Pregunta que vacantes ya están ocupadas y por quien, en lo cual recopila sus datos o documentos (Numero de cuenta, banco, adeudos importantes como INFONAVIT O FONACOT), también si un empleado renuncia, para cerrar su nomina y verificar que le deben dar de finiquito o no. | Consultar el estatus de las vacantes en tiempo real en un solo lugar. |
+| Corporativo | Supervisa, coordina y comunica con R.H sobre las vacantes, prospectos y empleados que tiene la empresa, preguntando en persona sobre su estatus de cada uno; quitando mucho tiempo y esfuerzo. | Supervisar el estatus de todo el personal en una sola plataforma, viendo con claridad y transparencia lo que su cede con cada uno sin tener que preguntar al área de R.H. |
 
-Si algo cambió respecto a la Visión del producto, anótalo.
-
-Usuario	Qué hace hoy sin el sistema	
-
-Qué espera del sistema
-
-Conflictos identificados entre usuarios:
+**Conflictos identificados entre usuarios:**
+Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos sensibles (problemas médicos, comentarios internos, temas familiares) solo los puede ver R.H, como se confirmo en la entrevista, la visibilidad por área, las demás áreas que no son R.H ven únicamente estatus, puesto y urgencia. 
 
 ## 3. Requisitos funcionales
 
-### 3.1 Resumen
+RF-001 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-ID	
+RF-002 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
+    
+RF-003 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Nombre	
+RF-004 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Prioridad	
+RF-005 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Origen
+RF-006 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-RF-001			
+RF-007 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-RF-002			
+RF-008 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-RF-003			
+RF-009 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-### 3.2 Fichas
+RF-010· Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Una ficha por requisito, con los mismos campos siempre. 
+RF-011 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Abajo va un ejemplo completo; bórralo cuando escribas los tuyos.
+RF-012 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-RF-001 · 
+RF-013 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Registro de consulta
+RF-014 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Campo	Contenido
+RF-015 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Descripción	
+RF-016 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-El sistema registra la consulta de un paciente con fecha, motivo, diagnóstico y veterinario que atendió.
+RF-017 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Origen	
+RF-018 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Entrevista con el veterinario, 15 de septiembre.
+RF-019 · Registro de consulta
+        
+    -Campo:
+        
+    -Contenido:
+        
+    -Descripción: 	
+        
+    -Origen:	
+        
+    -Prioridad: 	
+        
+    -Criterio de aceptación:
+        
+    -Relacionado: 
 
-Prioridad	Imprescindible
-
-Criterio de aceptación	
-
-Al guardar una consulta con los cuatro datos, esta aparece en el historial del paciente con la fecha correcta. 
-
-Si falta alguno, el sistema no guarda y señala cuál falta.
-
-Relacionado con	RF-004, RNF-SEG-001, RF-002 ·
-
-Campo	Contenido
-
-Descripción	
-
-Origen	
-
-Prioridad	
-
-Criterio de aceptación	
-
-Relacionado con	
 
 ## 4. Requisitos no funcionales
 
 ### 4.1 Resumen
 
-ID	
+|ID|Atributo de calidad|Descripción Métrica|Origen|Prioridad|Por qué importa|Afecta a| 
+|---|---|---|---|---|---|---|
+|RNF-REN-001 | 
 
-Atributo	
-
-Nombre	
-
-Prioridad	
-
-Origen
-
-RNF-REN-001	Rendimiento			
-
-RNF-SEG-001	Seguridad			
-
-RNF-USA-001	Usabilidad			
-
-### 4.2 Fichas
-
-Agrupadas por atributo de calidad. Abajo va un ejemplo completo; bórralo cuando escribas los tuyos.
-
-RNF-REN-001 · Tiempo de consulta del historial
-
-Campo	Contenido
-
-Atributo de calidad	Rendimiento
-
-Descripción	El historial completo de un paciente se despliega en menos de tres segundos.
-
-Métrica	Tiempo entre la solicitud y el despliegue completo, medido con hasta 500 consultas registradas para ese paciente.
-
-Origen	Derivado del tipo de sistema: de información, con consulta frecuente durante la atención.
-
-Prioridad	Imprescindible
-
-Por qué importa	La consulta ocurre con el paciente enfrente. Si tarda, el veterinario abandona el sistema y vuelve al expediente en papel.
-
-Afecta a	RF-001, RF-004, RNF-SEG-001 ·
-
-Campo	Contenido
-
-Atributo de calidad	
-
-Descripción	
-
-Métrica	
-
-Origen	
-
-Prioridad	
-
-Por qué importa	
-
-Afecta a	
 
 ## 5. Casos de uso
 
@@ -162,22 +361,22 @@ Se trabajan en la semana 7, después de la entrevista. Cada caso de uso se relac
 
 Esta tabla es la que hace posible el análisis de impacto de la semana 15. Mantenla actualizada conforme cambien los requisitos.
 
-Requisito	Origen	Caso de uso	Elemento del prototipo
-RF-001	Entrevista 15 sep	CU-01 Registrar consulta	Pantalla de consulta
+| Requisito | Origen | Caso de uso | Elemento del prototipo |
+|---|---|---|---|
+| RF-001 | Entrevista 15 sep | CU-01 | Registrar consulta | Pantalla de consulta |
 
 ## 7. Registro de cambios
 
-Cada modificación posterior a la primera versión se anota aquí. Un requisito eliminado se marca como tal, pero su identificador no se reutiliza.
+| Fecha | Requisito | Qué cambió | Por qué | Antes de entregar| 
+|---|---|---|---|---|
 
-Fecha	
-
-Requisito	
-
-Qué cambió	
-
-Por qué
-
-Antes de entregar
+## Revisión de la dupla 
+| Campo| Detalle |
+|---|---|
+| Revisora| |
+| Fecha de revisión |  |
+| Observaciones recibidas |  |
+| Cambios realizados |  |
 
     [ ] Todos los requisitos tienen identificador único y ninguno está repetido
     [ ] Cada requisito expresa una sola idea
