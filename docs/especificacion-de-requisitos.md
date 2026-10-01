@@ -39,7 +39,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 
 ## 3. Requisitos funcionales
 
-### 3.1 Resumen
+### 3.1 Resumen de RF
 | ID | Nombre | Prioridad | Origen |
 |---|---|---|---|
 | RF-001 | Registrar prospecto y vacante | Alta | Visión (alcance 1 y 2) y P.5 |
@@ -207,7 +207,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | RF-009 | Visión (resolución del conflicto) | CU-06 | P.7 |
 | RF-010 | Visión (regla 2) | CU-01, CU-04 | P.7 |
 | RF-011 | P.8 (supuesto) | CU-05, CU-06 | P.1, P.7 |
-| RF-012 | P.4, P8 | CU-06, CU-07 | P.7 |
+| RF-012 | P.4, P.8 | CU-06, CU-07 | P.7 |
 
 
 ## 7. Registro de cambios
