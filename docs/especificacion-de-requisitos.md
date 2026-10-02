@@ -191,6 +191,101 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | CU-07 | Reabrir vacante ocupada |
 | CU-08 | Archivar prospectos |
 
+### CU-01 · Registrar prospecto
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Dar de alta a un prospecto con sus datos y documentos para poder darle seguimiento. |
+| Precondición | RH está autenticado. |
+| Escenario principal | 1. RH selecciona "Registrar prospecto". <br> 2. El sistema muestra el formulario con nombre, edad, puesto, empresa, horario, localidad, escolaridad, teléfono, correo, problemas médicos y comentarios internos (estos dos últimos solo visibles para RH). <br> 3. RH captura los datos. <br> 4. RH adjunta los documentos del prospecto. <br> 5. RH guarda. <br> 6. El sistema valida los campos obligatorios y el formato de teléfono y correo. <br> 7. El sistema guarda el prospecto con estatus "prospecto" y lo muestra en el listado. |
+| Flujos alternos | **A1 · Campo obligatorio vacío o formato inválido (paso 6).** El sistema no guarda, marca cada campo con error e indica el formato esperado; RH corrige y vuelve al paso 5. <br> **A2 · Documento no válido (paso 4).** Si el archivo no es PDF, JPG o PNG, o pesa más de 10 MB, el sistema lo rechaza con un mensaje; RH adjunta otro o continúa sin él. <br> **A3 · La persona ya tiene un registro archivado (paso 6).** El sistema muestra ese registro y permite reactivarlo en lugar de crear uno nuevo; si RH acepta, se actualiza el registro conservando su historial. |
+| Postcondición | El prospecto queda registrado con estatus "prospecto", con sus datos y documentos consultables; los datos sensibles solo los ve RH. Si hubo un fallo, no se guarda ningún dato. |
+| Requisitos que utiliza | RF-001, RF-003, RF-004, RF-007, RF-010 |
+ 
+### CU-02 · Registrar vacante
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Dar de alta una vacante que hay que cubrir, con su nivel de urgencia. |
+| Precondición | RH está autenticado. |
+| Escenario principal | 1. RH selecciona "Registrar vacante". <br> 2. El sistema muestra el formulario con puesto, área, horario, localidad, nivel de urgencia y motivo de apertura. <br> 3. RH captura los datos. <br> 4. RH guarda. <br> 5. El sistema valida los campos obligatorios. <br> 6. El sistema guarda la vacante con estatus "disponible" y su nivel de urgencia. <br> 7. El sistema muestra la vacante en el listado. |
+| Flujos alternos | **A1 · Campo obligatorio vacío (paso 5).** El sistema no guarda y marca cada campo faltante; RH lo completa y vuelve al paso 4. <br> **A2 · RH cancela (paso 4).** No se guarda ningún dato y RH regresa al listado de vacantes. |
+| Postcondición | La vacante queda con estatus "disponible" y es visible para RH, Finanzas/Contaduría y Corporativo (estas dos últimas áreas solo ven estatus, puesto y urgencia). Si hubo un fallo, no se guarda ningún dato. |
+| Requisitos que utiliza | RF-001, RF-002, RF-004 |
+ 
+### CU-03 · Asignar prospecto a vacante
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Ligar un prospecto con una vacante disponible y dejarlo "en proceso". |
+| Precondición | RH está autenticado; existe un prospecto registrado y una vacante con estatus "disponible". |
+| Escenario principal | 1. RH abre una vacante disponible desde el listado. <br> 2. RH selecciona "Asignar prospecto". <br> 3. El sistema muestra los prospectos sin vacante activa, con filtros. <br> 4. RH selecciona un prospecto. <br> 5. El sistema muestra el resumen (prospecto y vacante) y pide confirmación. <br> 6. RH confirma. <br> 7. El sistema verifica que el prospecto no esté activo en otra vacante y que la vacante siga disponible. <br> 8. El sistema cambia el prospecto a "en proceso", lo liga a la vacante y registra usuario, fecha y hora. <br> 9. El sistema muestra la vacante con el prospecto asignado. |
+| Flujos alternos | **A1 · Prospecto activo en otra vacante (paso 7).** El sistema rechaza la asignación e indica en cuál vacante está activo; RH puede cancelar o abrir esa vacante. <br> **A2 · La vacante dejó de estar disponible (paso 7).** Otra sesión la ocupó mientras RH decidía; el sistema avisa, no asigna y actualiza el listado. <br> **A3 · Prospecto archivado que vuelve a aplicar (paso 3).** RH lo busca; el sistema lo muestra con marca "archivado"; RH lo reactiva conservando su historial y continúa en el paso 4. <br> **A4 · No hay prospectos elegibles (paso 3).** El sistema lo informa y ofrece registrar un prospecto (CU-01). <br> **A5 · RH cancela (paso 6).** No se guarda ningún cambio y regresa al detalle de la vacante. |
+| Postcondición | El prospecto está "en proceso" y ligado a la vacante, el cambio queda registrado y las demás áreas ven el estatus actualizado en 5 segundos o menos. Si hubo un fallo, no cambia ningún dato. |
+| Requisitos que utiliza | RF-002, RF-005, RF-006 |
+ 
+### CU-04 · Consultar historial de un prospecto
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Ver en un solo lugar los datos, documentos y vacantes anteriores de un prospecto, incluso si aplicó hace meses. |
+| Precondición | RH está autenticado; existe al menos un prospecto registrado (activo o archivado). |
+| Escenario principal | 1. RH abre la búsqueda de prospectos. <br> 2. RH escribe el nombre del prospecto. <br> 3. El sistema muestra las coincidencias. <br> 4. RH selecciona al prospecto. <br> 5. El sistema muestra en una sola pantalla sus datos (incluidos los sensibles), sus documentos y las vacantes a las que aplicó, con fechas. <br> 6. RH abre un documento si lo necesita. |
+| Flujos alternos | **A1 · Sin coincidencias (paso 3).** El sistema lo informa y ofrece registrar al prospecto (CU-01). <br> **A2 · Varios prospectos con el mismo nombre (paso 3).** El sistema muestra puesto y localidad de cada uno para que RH distinga; RH puede usar los filtros (CU-05). <br> **A3 · Prospecto archivado (paso 5).** El sistema muestra su historial completo con la marca "archivado", con sus datos y documentos conservados. |
+| Postcondición | RH consultó el historial completo sin modificar ningún dato. |
+| Requisitos que utiliza | RF-007, RF-008, RF-010 |
+ 
+### CU-05 · Filtrar vacantes y prospectos
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Encontrar las vacantes o los prospectos que cumplen ciertos criterios. |
+| Precondición | RH está autenticado; existen registros en el listado. |
+| Escenario principal | 1. RH abre el listado de vacantes o el de prospectos. <br> 2. El sistema muestra el listado completo; en vacantes, las urgentes aparecen primero con la etiqueta "Urgente". <br> 3. RH elige uno o más filtros: puesto, urgencia, localidad o estatus. <br> 4. El sistema muestra solo los registros que cumplen todos los filtros. <br> 5. RH abre el registro que necesita. |
+| Flujos alternos | **A1 · Ningún registro cumple los filtros (paso 4).** El sistema muestra "Sin resultados" y ofrece limpiar los filtros. <br> **A2 · RH limpia los filtros (paso 4).** El sistema vuelve a mostrar el listado completo. |
+| Postcondición | RH ve el listado filtrado; no se modifica ningún dato. |
+| Requisitos que utiliza | RF-006, RF-011 |
+ 
+### CU-06 · Consultar estatus de vacantes
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Finanzas/Contaduría y Corporativo |
+| Objetivo | Conocer el estatus vigente de las vacantes sin tener que preguntar a RH. |
+| Precondición | El usuario está autenticado con el rol de Finanzas/Contaduría o de Corporativo. |
+| Escenario principal | 1. El usuario inicia sesión. <br> 2. Si es de Finanzas/Contaduría, el sistema muestra en su pantalla de inicio la sección "Reabiertas recientes" con las vacantes reabiertas en las últimas 24 horas, con fecha y hora. <br> 3. El sistema muestra el listado de vacantes con estatus, puesto y urgencia; las urgentes aparecen primero con la etiqueta "Urgente". <br> 4. El usuario abre una vacante. <br> 5. El sistema muestra solo su estatus, puesto y urgencia. |
+| Flujos alternos | **A1 · No hay vacantes reabiertas (paso 2).** La sección indica "Sin reabiertas recientes". <br> **A2 · El usuario intenta ver datos sensibles o documentos (paso 5).** El sistema no los muestra. <br> **A3 · El usuario es de Corporativo (paso 2).** Ve el listado de vacantes sin la sección "Reabiertas recientes", que es solo para Finanzas/Contaduría. |
+| Postcondición | El usuario conoce el estatus vigente de las vacantes sin haber modificado ningún dato. |
+| Requisitos que utiliza | RF-009, RF-011, RF-012 |
+ 
+### CU-07 · Reabrir vacante ocupada
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Volver a dejar disponible una vacante que se había ocupado (por ejemplo, porque la persona renunció sin avisar) y que Finanzas/Contaduría se entere. |
+| Precondición | RH está autenticado; existe una vacante con estatus "ocupada". |
+| Escenario principal | 1. RH busca y abre la vacante ocupada. <br> 2. RH selecciona "Reabrir vacante". <br> 3. El sistema pide el motivo de la reapertura. <br> 4. RH indica el motivo y confirma. <br> 5. El sistema cambia la vacante a "disponible", conserva su nivel de urgencia y registra usuario, fecha, hora y motivo. <br> 6. El sistema incluye la vacante en "Reabiertas recientes" de Finanzas/Contaduría. <br> 7. El sistema muestra la confirmación. |
+| Flujos alternos | **A1 · RH no indica el motivo (paso 4).** El sistema no reabre la vacante y pide el motivo. <br> **A2 · La vacante ya está disponible (paso 5).** Otra sesión la reabrió antes; el sistema lo informa y no cambia nada. <br> **A3 · RH cancela (paso 4).** No se guarda ningún cambio y regresa al detalle de la vacante. |
+| Postcondición | La vacante está "disponible" con su motivo registrado, visible para todas las áreas, y Finanzas/Contaduría la ve en "Reabiertas recientes" durante 24 horas. Si hubo un fallo, no cambia ningún dato. |
+| Requisitos que utiliza | RF-002, RF-012 |
+ 
+### CU-08 · Archivar prospecto
+ 
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Apartar a un prospecto que no termina su proceso sin perder su información, para reutilizarla si vuelve a aplicar. |
+| Precondición | RH está autenticado; existe un prospecto con estatus "prospecto" o "en proceso". |
+| Escenario principal | 1. RH abre el registro del prospecto. <br> 2. RH selecciona "Archivar". <br> 3. El sistema pide confirmación e indica que la información se conserva. <br> 4. RH confirma. <br> 5. El sistema cambia el estatus a "archivado", libera la vacante si el prospecto estaba ligado a una y registra usuario, fecha y hora. <br> 6. El sistema muestra la confirmación; los datos y documentos del prospecto siguen consultables. |
+| Flujos alternos | **A1 · RH cancela (paso 4).** No se guarda ningún cambio. <br> **A2 · El prospecto ya está contratado (paso 2).** El sistema no permite archivarlo, porque ya terminó su proceso. <br> **A3 · El prospecto ya está archivado (paso 2).** El sistema lo informa y no cambia nada. |
+| Postcondición | El prospecto queda "archivado" con todos sus datos y documentos conservados, y puede reutilizarse si vuelve a aplicar (CU-01). Si hubo un fallo, no cambia ningún dato. |
+| Requisitos que utiliza | RF-002, RF-003 |
 
 ## 6. Trazabilidad
 
