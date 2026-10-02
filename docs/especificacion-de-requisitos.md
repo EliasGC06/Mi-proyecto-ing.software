@@ -225,7 +225,6 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 
 | Campo | Elemento |
 |---|---|
-| Revisor/a | [NOMBRE DE TU DUPLA] |
 | Fecha de revisión | 01/10/2026 |
 | Observaciones recibidas | 1. RF-001: el registro de prospecto y el de vacante eran dos requisitos separados, pero es la misma acción y el mismo proceso. <br> 2. Atributos de calidad: la Visión nombraba solo tres atributos y faltaba uno que registrara quién hizo un cambio, cuándo y en qué parte del sistema. |
 | Cambios realizados | 1. Se unió el registro de prospecto y vacante en RF-001 y se agregó el campo "motivo de apertura" a la vacante. <br> 2. Se agregó el atributo de trazabilidad con su métrica (RNF-06). |
