@@ -10,4 +10,4 @@ Autor: Elias García Cisneros
 - Especificación de requisitos: [docs/especificacion-de-requisitos.md](docs/especificacion-de-requisitos.md)
 - Diagrama de casos de uso: [.drawio](docs/diagramas/casos-de-uso.drawio) y [.png](docs/diagramas/casos-de-uso.png)
 - Prototipo en Figma: https://scope-hull-09512178.figma.site/ 
-- Video: (pega aquí el enlace)
+- Video: https://drive.google.com/file/d/16NuugP9HSSfSW2olBRf1mh4wjguS8lxK/view?usp=sharing
