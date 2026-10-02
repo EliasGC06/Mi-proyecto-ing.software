@@ -27,7 +27,7 @@
 
 | Tipo de usuario | Qué necesita del sistema | Qué le preocupa |
 |---|---|---|
-|Recursos Humanos |Son los principales usuarios del sistema en el cual ellos deben estar activos en la base de datos para actualizar las vacantes que ya están ocupadas o disponibles y dar seguimiento a los puestos que están en la empresa | Que la información que se suba a la base de datos este mal; por ejemplo mal acomodo, información incompleta, desactualizada. |
+|Recursos Humanos |Son los principales usuarios del sistema en el cual ellos deben estar activos en la base de datos para actualizar las vacantes que ya están ocupadas, disponibles o reapertura y dar seguimiento a los puestos que están en la empresa | Que la información que se suba a la base de datos este mal; por ejemplo mal acomodo, información incompleta, desactualizada. |
 |Finanzas, Contaduría | Consultar las vacantes que ya están ocupadas para darle seguimiento a sus nominas y cualquier tema con sus cuentas de banco, sus pagos o inconvenientes que se puedan presentar. |Que la información no se actualice, por ejemplo si ya salió una persona de su puesto, si sus pagos estén completos o incompletos o que su cuenta bancaria tiene o no problemas.  |
 |Corporativo |Poder tener supervisión total de la base de datos para saber como es el estado de las vacantes de la empresa. |Falta de transparencia en la base de datos, como si falta algún dato o incongruencias en las vacantes disponibles o cubiertas. |
 
