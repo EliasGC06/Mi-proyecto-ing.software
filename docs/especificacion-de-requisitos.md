@@ -214,19 +214,18 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 
 | Fecha | Requisito | Qué cambió | Por qué |
 |---|---|---|---|
-| 30/09/2026 | RF-001 | Se unió el registro de prospecto y vacante y se agregó el campo "motivo de apertura" a la vacante. | Por no tener demasiados requisitos funcionales, en este caso es la misma acción y el mismo proceso. La urgencia de una vacante depende de cómo se desocupó (P.5). |
-| 30/09/2026 | RF-002 | Se agregó el estatus "archivado" para el prospecto y la posibilidad de reabrir una vacante ocupada. | La Visión solo tenía tres estatus y no contemplaba la reapertura; la entrevista confirmó que los prospectos no contratados se archivan (P.12) y la ficha de dominio describe la vacante urgente que se cierra de golpe (P.4). |
-| 30/09/2026 | RF-003 | Se agregó archivar al prospecto que no termina su proceso y reutilizar su registro si vuelve a aplicar. | En la entrevista se confirmó que la información del prospecto se conserva y se actualiza al volver a aplicar (P.10, P.12). |
-| 30/09/2026 | RF-003 y RNF-03 | La Visión permitía a RH eliminar datos sensibles; se sustituyó por archivado y se prohíbe el borrado físico. | Contradice lo confirmado en la entrevista: la información nunca se borra (P.10, P.12). |
-| 30/09/2026 | RF-008 | Se agregó consultar el historial profesional de un prospecto en un solo lugar. | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas de la entrevista (P.7, P.9). |
-| 30/09/2026 | RF-012 | Se agregó señalar a Finanzas/Contaduría las vacantes reabiertas. | Hay que avisarles con urgencia cuando una vacante se reabre (P.4, P.8); como las notificaciones automáticas están fuera del alcance, se resuelve dentro del sistema. |
+| 01/10/2026 | RF-001 | Se unió el registro de prospecto y vacante y se agregó el campo "motivo de apertura" a la vacante. | Por no tener demasiados requisitos funcionales, en este caso es la misma acción y el mismo proceso. La urgencia de una vacante depende de cómo se desocupó (P.5). |
+| 01/10/2026 | RF-002 | Se agregó el estatus "archivado" para el prospecto y la posibilidad de reabrir una vacante ocupada. | La Visión solo tenía tres estatus y no contemplaba la reapertura; la entrevista confirmó que los prospectos no contratados se archivan (P.12) y la ficha de dominio describe la vacante urgente que se cierra de golpe (P.4). |
+| 01/10/2026 | RF-003 | Se agregó archivar al prospecto que no termina su proceso y reutilizar su registro si vuelve a aplicar. | En la entrevista se confirmó que la información del prospecto se conserva y se actualiza al volver a aplicar (P.10, P.12). |
+| 01/10/2026 | RF-008 | Se agregó consultar el historial profesional de un prospecto en un solo lugar. | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas de la entrevista (P.7, P.9). |
+| 01/10/2026 | RF-012 | Se agregó señalar a Finanzas/Contaduría las vacantes reabiertas. | Hay que avisarles con urgencia cuando una vacante se reabre (P.4, P.8) |
 | 01/10/2026 | RNF-01 a RNF-06 / Visión del producto | Se agrego una métrica a los atributos de calidad "trazabilidad". | La Visión nombraba solo 3 atributos, pero observo que faltaba uno que definiera los cambios que se hacen en el sistema y que queden registrado quien fue, cuando y en que parte del mismo. |
 
 ## 8. Revisión de la dupla
 
 | Campo | Elemento |
 |---|---|
-| Revisora | [NOMBRE DE TU DUPLA] |
-| Fecha de revisión | [DD/MM/2026] |
-| Observaciones recibidas | 1. [Requisito o sección]: [qué comentó] <br> 2. [Requisito o sección]: [qué comentó] |
-| Cambios realizados | 1. [Qué cambiaste por la observación 1] <br> 2. [Qué cambiaste por la observación 2, o por qué decidiste no cambiarlo] |
+| Revisor/a | [NOMBRE DE TU DUPLA] |
+| Fecha de revisión | 01/10/2026 |
+| Observaciones recibidas | 1. RF-001: el registro de prospecto y el de vacante eran dos requisitos separados, pero es la misma acción y el mismo proceso. <br> 2. Atributos de calidad: la Visión nombraba solo tres atributos y faltaba uno que registrara quién hizo un cambio, cuándo y en qué parte del sistema. |
+| Cambios realizados | 1. Se unió el registro de prospecto y vacante en RF-001 y se agregó el campo "motivo de apertura" a la vacante. <br> 2. Se agregó el atributo de trazabilidad con su métrica (RNF-06). |
