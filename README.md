@@ -11,4 +11,3 @@ Autor: Elias García Cisneros
 - Diagrama de casos de uso: [.drawio](docs/diagramas/casos-de-uso.drawio) y [.png](docs/diagramas/casos-de-uso.png)
 - Prototipo en Figma: https://scope-hull-09512178.figma.site/ 
 - Video: https://drive.google.com/file/d/16NuugP9HSSfSW2olBRf1mh4wjguS8lxK/view?usp=sharing
-- Arch: [docs/arch](docs/arc)
