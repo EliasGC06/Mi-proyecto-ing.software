@@ -1,20 +1,48 @@
-flowchart TD
-web[App web]
-subgraph api[API del sistema]
-agenda[Agenda<br/>citas y horarios]
-cobros[Cobros<br/>cuentas y pagos]
-exp[Expedientes<br/>historial clinico]
-notif[Notificador<br/>interfaz de envio]
-end
-db[(Base de datos)]
-correo[Servicio de correo]
-web --> agenda
-web --> cobros
-web --> exp
-cobros -->|pregunta que se atendio| agenda
-cobros -->|enviarRecibo| notif
-notif --> correo
-agenda --> db
-cobros --> db
-exp --> db
-style cobros fill:#ff5d00,color:#fff
+flowchart TB
+    spa["<b>Aplicación web</b><br/>[React, SPA]"]
+    bd[("Base de datos<br/>[PostgreSQL]")]
+    archivos[("Almacén de documentos<br/>[Sistema de archivos]")]
+    correo["Servicio de correo<br/>[SMTP]"]
+ 
+    subgraph api["Aplicación de negocio [Node.js + Express, monolito modular]"]
+        direction TB
+        ctrl["<b>Capa de API</b><br/>Recibe las peticiones REST<br/>y valida los datos de entrada"]
+        auth["<b>Módulo Usuarios y Roles</b><br/>Autentica y determina el rol<br/>(RH, Finanzas, Corporativo)"]
+        vis["<b>Módulo Visibilidad por rol</b><br/>Decide qué campos y registros ve<br/>cada rol (Strategy por rol)"]
+        pros["<b>Módulo Prospectos</b><br/>Alta, clasificación, verificación<br/>y filtrado de prospectos"]
+        vac["<b>Módulo Vacantes</b><br/>Alta, urgencia, estado<br/>y filtrado de vacantes"]
+        post["<b>Módulo Postulaciones</b><br/>Relaciona prospectos con vacantes<br/>y controla su avance"]
+        docs["<b>Módulo Documentos</b><br/>Carga, verifica y recupera<br/>los documentos del prospecto"]
+        bit["<b>Módulo Bitácora</b><br/>Registra quién cambió qué y cuándo<br/>(RNF-06)"]
+        notif["<b>Módulo Notificaciones</b><br/>Avisa de cambios relevantes<br/>(Observer + Adapter de correo)"]
+        repo["<b>Capa de Persistencia</b><br/>Acceso a base de datos<br/>y al almacén de documentos"]
+    end
+ 
+    spa -->|"JSON / HTTPS"| ctrl
+    ctrl --> auth
+    ctrl --> pros
+    ctrl --> vac
+    ctrl --> post
+    ctrl --> docs
+    pros --> vis
+    vac --> vis
+    post --> vis
+    vis --> auth
+    post --> pros
+    post --> vac
+    pros --> docs
+    pros -->|"Publica cambios"| bit
+    vac -->|"Publica cambios"| bit
+    post -->|"Publica cambios"| bit
+    pros -->|"Publica eventos"| notif
+    vac -->|"Publica eventos"| notif
+    post -->|"Publica eventos"| notif
+    pros --> repo
+    vac --> repo
+    post --> repo
+    docs --> repo
+    bit --> repo
+    auth --> repo
+    repo -->|"SQL"| bd
+    repo -->|"Acceso a disco"| archivos
+    notif -->|"SMTP"| correo
