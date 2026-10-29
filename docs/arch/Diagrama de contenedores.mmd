@@ -1,5 +1,5 @@
 flowchart TB
-    usuario["👤 Usuario<br/>(RH, Finanzas, Corporativo)"]
+    usuario[" Usuario<br/>(RH, Finanzas, Corporativo)"]
  
     subgraph servidor["Servidor de la empresa (instalación única del cliente)"]
         spa["<b>Aplicación web</b><br/>[React, SPA]<br/>Pantallas de vacantes, prospectos<br/>y documentos según el rol"]
@@ -8,7 +8,7 @@ flowchart TB
         archivos[("<b>Almacén de documentos</b><br/>[Sistema de archivos del servidor]<br/>CV, identificaciones y comprobantes")]
     end
  
-    correo["✉️ Servicio de correo<br/>de la empresa [SMTP]"]
+    correo[" Servicio de correo<br/>de la empresa [SMTP]"]
  
     usuario -->|"Usa desde el navegador [HTTPS]"| spa
     spa -->|"Solicita datos y acciones [JSON sobre HTTPS / API REST]"| api
