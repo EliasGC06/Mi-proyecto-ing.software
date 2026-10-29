@@ -1,13 +1,17 @@
-flowchart TD
-rec([Recepcionista])
-subgraph sistema[Sistema de la clinica]
-web[App web<br/>React]
-api[API<br/>Node.js]
-db[(Base de datos<br/>PostgreSQL)]
-end
-lab[Laboratorio externo]
-rec -->|usa| web
-web -->|HTTPS/JSON| api
-api -->|lee y escribe| db
-api -->|SFTP| lab
-style api fill:#ff5d00,color:#fff
+flowchart TB
+    usuario["👤 Usuario<br/>(RH, Finanzas, Corporativo)"]
+ 
+    subgraph servidor["Servidor de la empresa (instalación única del cliente)"]
+        spa["<b>Aplicación web</b><br/>[React, SPA]<br/>Pantallas de vacantes, prospectos<br/>y documentos según el rol"]
+        api["<b>Aplicación de negocio</b><br/>[Node.js + Express, monolito modular]<br/>Reglas de negocio, permisos por rol<br/>y bitácora de cambios"]
+        bd[("<b>Base de datos</b><br/>[PostgreSQL]<br/>Vacantes, prospectos, postulaciones,<br/>usuarios y bitácora")]
+        archivos[("<b>Almacén de documentos</b><br/>[Sistema de archivos del servidor]<br/>CV, identificaciones y comprobantes")]
+    end
+ 
+    correo["✉️ Servicio de correo<br/>de la empresa [SMTP]"]
+ 
+    usuario -->|"Usa desde el navegador [HTTPS]"| spa
+    spa -->|"Solicita datos y acciones [JSON sobre HTTPS / API REST]"| api
+    api -->|"Lee y escribe registros [SQL, conexión TCP]"| bd
+    api -->|"Guarda y lee archivos [acceso a disco local]"| archivos
+    api -->|"Envía avisos de cambios [SMTP]"| correo
