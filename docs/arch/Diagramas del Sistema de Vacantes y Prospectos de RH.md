@@ -57,7 +57,8 @@ flowchart TB
     bd[("Base de datos<br/>[PostgreSQL]")]
     archivos[("Almacén de documentos<br/>[Sistema de archivos]")]
     correo["Servicio de correo<br/>[SMTP]"]
-
+ 
+    subgraph api["Aplicación de negocio [Node.js + Express, monolito modular]"]
         direction TB
         ctrl["<b>Capa de API</b><br/>Recibe las peticiones REST<br/>y valida los datos de entrada"]
         auth["<b>Módulo Usuarios y Roles</b><br/>Autentica y determina el rol<br/>(RH, Finanzas, Corporativo)"]
@@ -70,7 +71,7 @@ flowchart TB
         notif["<b>Módulo Notificaciones</b><br/>Avisa de cambios relevantes<br/>(Observer + Adapter de correo)"]
         repo["<b>Capa de Persistencia</b><br/>Acceso a base de datos<br/>y al almacén de documentos"]
     end
-
+ 
     spa -->|"JSON / HTTPS"| ctrl
     ctrl --> auth
     ctrl --> pros
@@ -100,6 +101,4 @@ flowchart TB
     repo -->|"Acceso a disco"| archivos
     notif -->|"SMTP"| correo
 ```
-
 ---
-
