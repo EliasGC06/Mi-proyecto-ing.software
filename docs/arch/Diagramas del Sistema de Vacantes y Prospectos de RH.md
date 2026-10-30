@@ -58,7 +58,6 @@ flowchart TB
     archivos[("Almacén de documentos<br/>[Sistema de archivos]")]
     correo["Servicio de correo<br/>[SMTP]"]
 
-    subgraph api["Aplicación de negocio [Node.js + Express, monolito modular]"]
         direction TB
         ctrl["<b>Capa de API</b><br/>Recibe las peticiones REST<br/>y valida los datos de entrada"]
         auth["<b>Módulo Usuarios y Roles</b><br/>Autentica y determina el rol<br/>(RH, Finanzas, Corporativo)"]
