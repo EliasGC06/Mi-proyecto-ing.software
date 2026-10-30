@@ -3,102 +3,88 @@
 Sistema de software instalado (un solo cliente) que centraliza vacantes, prospectos, documentos y postulaciones para el área de Recursos Humanos, con visibilidad controlada por rol para Finanzas/Contaduría y Corporativo.
 
 ## 1. Diagrama de contexto
-
+ 
 ```mermaid
 flowchart TB
-    rh[" Personal de RH<br/>Registra, filtra y da seguimiento<br/>a vacantes y prospectos"]
-    fin[" Finanzas / Contaduría<br/>Consulta información de<br/>contratación para su área"]
-    corp[" Corporativo<br/>Se mantiene informado del<br/>estado de las vacantes"]
-
-    sistema["<b>Sistema de Vacantes y Prospectos</b><br/>Centraliza vacantes, prospectos, documentos<br/>y postulaciones. Muestra a cada área<br/>solo lo que le corresponde"]
-
-    correo[" Servicio de correo<br/>de la empresa<br/>(sistema externo)"]
-
+    rh["Personal de RH<br/>Registra y da seguimiento<br/>a vacantes y prospectos"]
+    fin["Finanzas<br/>Consulta la información<br/>de contratación"]
+    corp["Corporativo<br/>Consulta el estado<br/>de las vacantes"]
+ 
+    sistema["Sistema de Vacantes y Prospectos<br/>Centraliza vacantes, prospectos,<br/>documentos y postulaciones"]
+ 
+    correo["Servicio de correo<br/>(sistema externo)"]
+ 
     rh -->|"Registra y consulta"| sistema
-    fin -->|"Consulta (solo lectura)"| sistema
-    corp -->|"Consulta (solo lectura)"| sistema
+    fin -->|"Consulta"| sistema
+    corp -->|"Consulta"| sistema
     sistema -->|"Envía avisos de cambios"| correo
-    correo -.->|"Entrega avisos a"| rh
 ```
-
+ 
 ---
-
+ 
 ## 2. Diagrama de contenedores
-
+ 
 ```mermaid
 flowchart TB
-    usuario[" Usuario<br/>(RH, Finanzas, Corporativo)"]
-
-    subgraph servidor["Servidor de la empresa (instalación única del cliente)"]
-        spa["<b>Aplicación web</b><br/>[React, SPA]<br/>Pantallas de vacantes, prospectos<br/>y documentos según el rol"]
-        api["<b>Aplicación de negocio</b><br/>[Node.js + Express, monolito modular]<br/>Reglas de negocio, permisos por rol<br/>y bitácora de cambios"]
-        bd[("<b>Base de datos</b><br/>[PostgreSQL]<br/>Vacantes, prospectos, postulaciones,<br/>usuarios y bitácora")]
-        archivos[("<b>Almacén de documentos</b><br/>[Sistema de archivos del servidor]<br/>CV, identificaciones y comprobantes")]
+    usuario["Usuario<br/>(RH, Finanzas, Corporativo)"]
+ 
+    subgraph servidor["Servidor de la empresa"]
+        spa["Aplicación web<br/>[React]<br/>Pantallas según el rol"]
+        api["Aplicación de negocio<br/>[Node.js + Express]<br/>Reglas de negocio y bitácora"]
+        bd[("Base de datos<br/>[PostgreSQL]")]
+        archivos[("Almacén de documentos<br/>[Archivos del servidor]")]
     end
-
-    correo[" Servicio de correo<br/>de la empresa [SMTP]"]
-
-    usuario -->|"Usa desde el navegador [HTTPS]"| spa
-    spa -->|"Solicita datos y acciones [JSON sobre HTTPS / API REST]"| api
-    api -->|"Lee y escribe registros [SQL, conexión TCP]"| bd
-    api -->|"Guarda y lee archivos [acceso a disco local]"| archivos
-    api -->|"Envía avisos de cambios [SMTP]"| correo
-```
-
----
-
-## 3. Diagrama de componentes
-
-Interior de la Aplicación de negocio, el contenedor donde viven las reglas de negocio.
-
-```mermaid
-flowchart TB
-    spa["<b>Aplicación web</b><br/>[React, SPA]"]
-    bd[("Base de datos<br/>[PostgreSQL]")]
-    archivos[("Almacén de documentos<br/>[Sistema de archivos]")]
+ 
     correo["Servicio de correo<br/>[SMTP]"]
  
-    subgraph api["Aplicación de negocio [Node.js + Express, monolito modular]"]
+    usuario -->|"Usa el navegador [HTTPS]"| spa
+    spa -->|"Pide datos y acciones [JSON / HTTPS]"| api
+    api -->|"Lee y guarda registros [SQL]"| bd
+    api -->|"Lee y guarda archivos [acceso a disco]"| archivos
+    api -->|"Envía avisos de cambios [SMTP]"| correo
+```
+ 
+---
+ 
+## 3. Diagrama de componentes
+ 
+```mermaid
+flowchart TB
+    spa["Aplicación web<br/>[React]"]
+    bd[("Base de datos<br/>[PostgreSQL]")]
+    archivos[("Almacén de documentos<br/>[Archivos del servidor]")]
+    correo["Servicio de correo<br/>[SMTP]"]
+ 
+    subgraph api["Aplicación de negocio [Node.js + Express]"]
         direction TB
-        ctrl["<b>Capa de API</b><br/>Recibe las peticiones REST<br/>y valida los datos de entrada"]
-        auth["<b>Módulo Usuarios y Roles</b><br/>Autentica y determina el rol<br/>(RH, Finanzas, Corporativo)"]
-        vis["<b>Módulo Visibilidad por rol</b><br/>Decide qué campos y registros ve<br/>cada rol (Strategy por rol)"]
-        pros["<b>Módulo Prospectos</b><br/>Alta, clasificación, verificación<br/>y filtrado de prospectos"]
-        vac["<b>Módulo Vacantes</b><br/>Alta, urgencia, estado<br/>y filtrado de vacantes"]
-        post["<b>Módulo Postulaciones</b><br/>Relaciona prospectos con vacantes<br/>y controla su avance"]
-        docs["<b>Módulo Documentos</b><br/>Carga, verifica y recupera<br/>los documentos del prospecto"]
-        bit["<b>Módulo Bitácora</b><br/>Registra quién cambió qué y cuándo<br/>(RNF-06)"]
-        notif["<b>Módulo Notificaciones</b><br/>Avisa de cambios relevantes<br/>(Observer + Adapter de correo)"]
-        repo["<b>Capa de Persistencia</b><br/>Acceso a base de datos<br/>y al almacén de documentos"]
+        ctrl["API<br/>Recibe las peticiones"]
+        usr["Usuarios y Roles<br/>Define qué ve cada rol"]
+        pros["Prospectos"]
+        vac["Vacantes"]
+        post["Postulaciones"]
+        docs["Documentos"]
+        bit["Bitácora<br/>Registra los cambios"]
+        notif["Notificaciones<br/>Avisa por correo"]
+        repo["Persistencia<br/>Guarda y lee datos"]
     end
  
     spa -->|"JSON / HTTPS"| ctrl
-    ctrl --> auth
+    ctrl --> usr
     ctrl --> pros
     ctrl --> vac
     ctrl --> post
     ctrl --> docs
-    pros --> vis
-    vac --> vis
-    post --> vis
-    vis --> auth
-    post --> pros
-    post --> vac
-    pros --> docs
-    pros -->|"Publica cambios"| bit
-    vac -->|"Publica cambios"| bit
-    post -->|"Publica cambios"| bit
-    pros -->|"Publica eventos"| notif
-    vac -->|"Publica eventos"| notif
-    post -->|"Publica eventos"| notif
+    post --> bit
+    post --> notif
     pros --> repo
     vac --> repo
     post --> repo
     docs --> repo
     bit --> repo
-    auth --> repo
+    usr --> repo
     repo -->|"SQL"| bd
     repo -->|"Acceso a disco"| archivos
     notif -->|"SMTP"| correo
 ```
+ 
 ---
