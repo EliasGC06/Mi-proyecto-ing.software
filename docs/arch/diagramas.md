@@ -273,4 +273,32 @@ EnProceso --> Archivado: RH archiva y libera la vacante (CU-08)
 Archivado --> Prospecto: vuelve a aplicar y RH lo reactiva (CU-03 A3)
 Contratado --> [*]
 ```
- 
+
+## 7. Diagrama de flujo
+```mermaid
+flowchart TD
+ini([Inicio])
+vac{"La vacante esta abierta?"}
+doc{"Los documentos estan verificados?"}
+rol{"El usuario es de RH?"}
+apl[Avanzar la postulacion y registrar en bitacora]
+err1[Vacante cerrada]
+err2[Documentos incompletos]
+err3[Sin permiso para modificar]
+fin([Fin])
+ini --> rol
+rol -->|No| err3
+rol -->|Si| vac
+vac -->|No| err1
+vac -->|Si| doc
+doc -->|No| err2
+doc -->|Si| apl
+err1 --> fin
+err2 --> fin
+err3 --> fin
+apl --> fin
+style apl fill:#ff5d00,color:#fff
+```
+
+---
+
