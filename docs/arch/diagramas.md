@@ -89,8 +89,8 @@ flowchart TB
  
 ---
 
-## 4. Diagrama de clases 
-
+## 4. Diagrama de clases
+ 
 ```mermaid
 classDiagram
 class Empresa {
@@ -99,7 +99,7 @@ class Empresa {
 +registrarVacante(vacante) void
 +consultarVacantesAbiertas() List~Vacante~
 }
-
+ 
 class Vacante {
 -puesto: string
 -horario: string
@@ -108,8 +108,9 @@ class Vacante {
 -estado: string
 +cambiarEstado(estado) void
 +estaAbierta() boolean
++asignar(prospecto) Postulacion
 }
-
+ 
 class Prospecto {
 -nombre: string
 -edad: int
@@ -117,77 +118,88 @@ class Prospecto {
 -correo: string
 -escolaridad: string
 -comentarios: string
+-estado: string
 +verificarDocumentos() boolean
 +agregarDocumento(documento) void
++estaActivo() boolean
++cambiarEstado(estado) void
 }
-
+ 
 class Documento {
 -tipo: string
 -archivo: string
 -verificado: boolean
 +marcarVerificado() void
 }
-
+ 
 class Postulacion {
 -fecha: Date
 -estado: string
++Postulacion(prospecto, vacante)
 +avanzar(nuevoEstado) void
 }
-
+ 
 class Usuario {
 -nombre: string
 -rol: string
 -politica: PoliticaVisibilidad
 +consultarProspecto(prospecto) Map
 }
-
+ 
 class PoliticaVisibilidad {
 <<interface>>
 +camposVisibles(prospecto) Map
 }
-
+ 
 class VisibilidadRH {
 +camposVisibles(prospecto) Map
 }
-
+ 
 class VisibilidadFinanzas {
 +camposVisibles(prospecto) Map
 }
-
+ 
 class VisibilidadCorporativo {
 +camposVisibles(prospecto) Map
 }
-
+ 
+class Evento {
+-tipo: string
+-usuario: string
+-fecha: Date
+-detalle: string
+}
+ 
 class RegistroBitacora {
 -usuario: string
 -accion: string
 -fecha: Date
 }
-
+ 
 class Observador {
 <<interface>>
 +actualizar(evento) void
 }
-
+ 
 class Bitacora {
 -registros: List~RegistroBitacora~
 +actualizar(evento) void
 }
-
+ 
 class Notificador {
 -servicio: ServicioCorreo
 +actualizar(evento) void
 }
-
+ 
 class ServicioCorreo {
 <<interface>>
 +enviar(destino, mensaje) boolean
 }
-
+ 
 class AdaptadorSMTP {
 +enviar(destino, mensaje) boolean
 }
-
+ 
 Empresa "1" --> "*" Vacante : publica
 Vacante "1" --> "*" Postulacion : recibe
 Prospecto "1" --> "*" Postulacion : realiza
@@ -196,12 +208,69 @@ Usuario "1" --> "1" PoliticaVisibilidad : usa
 PoliticaVisibilidad <|.. VisibilidadRH
 PoliticaVisibilidad <|.. VisibilidadFinanzas
 PoliticaVisibilidad <|.. VisibilidadCorporativo
+Postulacion ..> Evento : crea
 Postulacion ..> Observador : notifica cambios
+Observador ..> Evento : recibe
 Observador <|.. Bitacora
 Observador <|.. Notificador
 Bitacora "1" --> "*" RegistroBitacora : guarda
 Notificador "1" --> "1" ServicioCorreo : envía con
 ServicioCorreo <|.. AdaptadorSMTP
 ```
-
+ 
 ---
+ 
+## 5. Diagrama de secuencia: asignar prospecto a vacante (CU-03)
+ 
+```mermaid
+sequenceDiagram
+actor RH as Personal de RH
+participant Web as App web
+participant API as API
+participant Pro as Prospecto
+participant Vac as Vacante
+participant Pos as Postulacion
+participant Bit as Bitacora
+participant Not as Notificador
+participant Smtp as AdaptadorSMTP
+RH->>Web: Elige vacante y prospecto y confirma
+Web->>API: asignar(idVacante, idProspecto)
+API->>Pro: estaActivo()
+Pro-->>API: resultado
+API->>Vac: estaAbierta()
+Vac-->>API: resultado
+alt prospecto activo o vacante no disponible (A1, A2)
+API-->>Web: rechaza la asignacion y explica el motivo
+Web-->>RH: Muestra el aviso
+else todo correcto
+Note over API,Not: Una sola transaccion (ADR-001)
+API->>Vac: asignar(prospecto)
+Vac->>Pos: crear(prospecto, vacante)
+Vac-->>API: postulacion
+API->>Pro: cambiarEstado("en proceso")
+API->>Pos: avanzar("en proceso")
+Pos->>Bit: actualizar(evento)
+Pos->>Not: actualizar(evento)
+Not->>Smtp: enviar(destino, mensaje)
+Pos-->>API: listo
+API-->>Web: asignacion registrada
+Web-->>RH: Muestra la vacante con el prospecto asignado
+end
+```
+ 
+---
+ 
+## 6. Diagrama de estados: prospecto
+ 
+```mermaid
+stateDiagram-v2
+state "En proceso" as EnProceso
+[*] --> Prospecto: RH registra al prospecto (CU-01)
+Prospecto --> EnProceso: se asigna a una vacante (CU-03)
+EnProceso --> Contratado: se contrata
+Prospecto --> Archivado: RH archiva (CU-08)
+EnProceso --> Archivado: RH archiva y libera la vacante (CU-08)
+Archivado --> Prospecto: vuelve a aplicar y RH lo reactiva (CU-03 A3)
+Contratado --> [*]
+```
+ 
