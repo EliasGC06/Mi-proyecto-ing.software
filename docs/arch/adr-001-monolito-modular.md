@@ -10,21 +10,13 @@ El sistema registra vacantes, prospectos, postulaciones y documentos para el ár
 
 Condiciones reales del proyecto que influyen en la decisión:
 
-- **Un solo cliente.** El sistema es software instalado en la infraestructura de la empresa, no un servicio para varias organizaciones, así que no hay multi-tenancy ni necesidad de escalar por cliente.
+- **Un solo cliente.** El sistema es software instalado en la infraestructura de una sola empresa.
 - **Carga baja y predecible.** Los usuarios son el personal de RH y unas pocas personas de otras áreas. No hay picos de tráfico que justifiquen escalar partes del sistema por separado.
-- **Equipo pequeño.** El sistema lo construye una sola persona como proyecto escolar, con tiempo limitado y sin equipo de operaciones.
 - **Reglas de negocio muy relacionadas.** Prospectos, vacantes, postulaciones y bitácora comparten datos y deben mantenerse consistentes. Por ejemplo, cambiar el estado de una postulación debe quedar en la bitácora en la misma operación.
-- **Operación sencilla.** La empresa debe poder instalarlo y mantenerlo sin infraestructura especializada.
-
-Alternativas consideradas:
-
-1. **Monolito clásico:** una sola aplicación sin fronteras internas definidas.
-2. **Monolito modular:** una sola aplicación desplegable, dividida internamente en módulos con responsabilidades y dependencias explícitas.
-3. **Microservicios:** un servicio desplegable por cada módulo (prospectos, vacantes, documentos, bitácora, notificaciones).
 
 ## Decisión
 
-Se construirá el sistema como un **monolito modular**: una sola aplicación de negocio que se despliega como una unidad, con módulos internos separados (Usuarios y Roles, Visibilidad por rol, Prospectos, Vacantes, Postulaciones, Documentos, Bitácora, Notificaciones y Persistencia).
+Se construirá como un **monolito modular**: una sola aplicación de negocio que se despliega como una unidad, con módulos internos separados (Usuarios y Roles, Visibilidad por rol, Prospectos, Vacantes, Postulaciones, Documentos, Bitácora, Notificaciones y Persistencia).
 
 Reglas para mantener la modularidad:
 
@@ -48,10 +40,3 @@ Reglas para mantener la modularidad:
 - Una falla grave en un módulo puede afectar a toda la aplicación.
 - La separación entre módulos depende de disciplina del equipo; si no se respetan las interfaces, el sistema puede degradarse hacia un monolito clásico.
 - Quedamos atados a un solo stack tecnológico para toda la aplicación de negocio.
-
-**Por qué no las otras opciones**
-
-- *Monolito clásico:* sería igual de fácil de desplegar, pero sin fronteras entre módulos sería más difícil de mantener, probar y explicar a quien lea la documentación.
-- *Microservicios:* resuelven problemas de escala y de equipos grandes que este sistema no tiene, y a cambio añaden complejidad de red, despliegue y consistencia de datos que un cliente único con un equipo de una persona no puede sostener.
-
-**Cuándo revisar esta decisión:** si el sistema pasa a ofrecerse como servicio para varias empresas (multi-tenancy), o si la carga de un módulo específico crece lo suficiente para necesitar escalarlo de forma independiente.
