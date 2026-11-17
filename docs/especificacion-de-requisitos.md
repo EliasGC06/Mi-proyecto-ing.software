@@ -4,7 +4,7 @@ Sistema: Base de Datos de vacantes y prospectos R.H.
 
 Autor: Elias García Cisneros
 
-Versión: 0.1 
+Versión: 0.2 
 
 Fecha de la última actualización: 30/09/2026
 
