@@ -47,46 +47,57 @@ flowchart TB
 ---
  
 ## 3. Diagrama de componentes
- 
+
 ```mermaid
 flowchart TB
     spa["Aplicación web<br/>[React]"]
     bd[("Base de datos<br/>[PostgreSQL]")]
     archivos[("Almacén de documentos<br/>[Archivos del servidor]")]
     correo["Servicio de correo<br/>[SMTP]"]
- 
+
     subgraph api["Aplicación de negocio [Node.js + Express]"]
         direction TB
         ctrl["API<br/>Recibe las peticiones"]
-        usr["Usuarios y Roles<br/>Define qué ve cada rol"]
+        usr["Usuarios y Roles<br/>Identifica el rol de quien consulta"]
+        vis["Visibilidad por rol<br/>Define qué campos ve cada rol (Strategy)"]
         pros["Prospectos"]
         vac["Vacantes"]
         post["Postulaciones"]
         docs["Documentos"]
-        bit["Bitácora<br/>Registra los cambios"]
-        notif["Notificaciones<br/>Avisa por correo"]
-        repo["Persistencia<br/>Guarda y lee datos"]
+        ev["Eventos internos<br/>Avisan cada cambio (Observer)"]
+        bit["Bitácora<br/>Registra usuario, fecha y hora"]
+        notif["Notificaciones<br/>Prepara los avisos"]
+        mail["Adaptador de correo<br/>Aísla al proveedor (Adapter)"]
+        repo["Persistencia<br/>Único acceso a datos y archivos"]
     end
- 
+
     spa -->|"JSON / HTTPS"| ctrl
     ctrl --> usr
     ctrl --> pros
     ctrl --> vac
     ctrl --> post
     ctrl --> docs
-    post --> bit
-    post --> notif
+    usr --> vis
+
+    pros -.->|"publica: prospecto archivado"| ev
+    vac -.->|"publica"| ev
+    post -.->|"publica"| ev
+    ev -.->|"reacciona"| bit
+    ev -.->|"reacciona"| notif
+    notif --> mail
+
     pros --> repo
     vac --> repo
     post --> repo
     docs --> repo
     bit --> repo
     usr --> repo
+
     repo -->|"SQL"| bd
     repo -->|"Acceso a disco"| archivos
-    notif -->|"SMTP"| correo
+    mail -->|"SMTP"| correo
 ```
- 
+
 ---
 
 ## 4. Diagrama de clases
@@ -119,10 +130,16 @@ class Prospecto {
 -escolaridad: string
 -comentarios: string
 -estado: string
+-motivoArchivo: string
+-clasificacionArchivo: ClasificacionArchivo
+-fechaArchivo: Date
 +verificarDocumentos() boolean
 +agregarDocumento(documento) void
 +estaActivo() boolean
 +cambiarEstado(estado) void
++archivar(motivo, clasificacion) void
++reactivar() void
++esElegible() boolean
 }
  
 class Documento {
@@ -163,6 +180,12 @@ class VisibilidadCorporativo {
 +camposVisibles(prospecto) Map
 }
  
+class ClasificacionArchivo {
+<<enumeration>>
+Recontratable
+DescartadoDefinitivo
+}
+
 class Evento {
 -tipo: string
 -usuario: string
@@ -208,6 +231,9 @@ Usuario "1" --> "1" PoliticaVisibilidad : usa
 PoliticaVisibilidad <|.. VisibilidadRH
 PoliticaVisibilidad <|.. VisibilidadFinanzas
 PoliticaVisibilidad <|.. VisibilidadCorporativo
+Prospecto "1" --> "0..1" ClasificacionArchivo : clasificado como
+Prospecto ..> Evento : crea al archivar
+Prospecto ..> Observador : notifica el archivado
 Postulacion ..> Evento : crea
 Postulacion ..> Observador : notifica cambios
 Observador ..> Evento : recibe
@@ -221,7 +247,7 @@ ServicioCorreo <|.. AdaptadorSMTP
 ---
  
 ## 5. Diagrama de secuencia: asignar prospecto a vacante (CU-03)
- 
+
 ```mermaid
 sequenceDiagram
 actor RH as Personal de RH
@@ -229,7 +255,6 @@ participant Web as App web
 participant API as API
 participant Pro as Prospecto
 participant Vac as Vacante
-participant Pos as Postulacion
 participant Bit as Bitacora
 participant Not as Notificador
 participant Smtp as AdaptadorSMTP
@@ -237,15 +262,24 @@ RH->>Web: Elige vacante y prospecto y confirma
 Web->>API: asignar(idVacante, idProspecto)
 API->>Pro: estaActivo()
 Pro-->>API: resultado
+API->>Pro: esElegible()
+Pro-->>API: resultado
 API->>Vac: estaAbierta()
 Vac-->>API: resultado
 alt prospecto activo o vacante no disponible (A1, A2)
 API-->>Web: rechaza la asignacion y explica el motivo
 Web-->>RH: Muestra el aviso
+else prospecto Descartado definitivo (A3, propuesta SC-001)
+API-->>Web: bloquea, con el motivo y la fecha del descarte
+Web-->>RH: Muestra la alerta de reingreso no permitido
 else todo correcto
 Note over API,Not: Una sola transaccion (ADR-001)
+opt prospecto archivado como Recontratable (A3)
+API->>Pro: reactivar()
+end
 API->>Vac: asignar(prospecto)
-Vac->>Pos: crear(prospecto, vacante)
+create participant Pos as Postulacion
+Vac->>Pos: Postulacion(prospecto, vacante)
 Vac-->>API: postulacion
 API->>Pro: cambiarEstado("en proceso")
 API->>Pos: avanzar("en proceso")
@@ -257,21 +291,25 @@ API-->>Web: asignacion registrada
 Web-->>RH: Muestra la vacante con el prospecto asignado
 end
 ```
- 
+
 ---
  
 ## 6. Diagrama de estados: prospecto
- 
+
 ```mermaid
 stateDiagram-v2
 state "En proceso" as EnProceso
 [*] --> Prospecto: RH registra al prospecto (CU-01)
 Prospecto --> EnProceso: se asigna a una vacante (CU-03)
-EnProceso --> Contratado: se contrata
-Prospecto --> Archivado: RH archiva (CU-08)
-EnProceso --> Archivado: RH archiva y libera la vacante (CU-08)
-Archivado --> Prospecto: vuelve a aplicar y RH lo reactiva (CU-03 A3)
+EnProceso --> Contratado: se contrata (CU-09)
+Prospecto --> Archivado: RH archiva con motivo y clasificación (CU-08)
+EnProceso --> Archivado: RH archiva con motivo y clasificación y libera la vacante (CU-08)
+Archivado --> Prospecto: [clasificación ≠ DescartadoDefinitivo] vuelve a aplicar y RH lo reactiva (CU-01 A3, CU-03 A3)
 Contratado --> [*]
+note right of Archivado
+Si la clasificación es DescartadoDefinitivo no hay transición de salida:
+el expediente se conserva (RNF-03) pero no se reactiva (propuesta SC-001)
+end note
 ```
 
 ## 7. Diagrama de flujo
@@ -301,4 +339,3 @@ style apl fill:#ff5d00,color:#fff
 ```
 
 ---
-
