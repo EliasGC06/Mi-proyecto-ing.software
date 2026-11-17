@@ -25,4 +25,4 @@ Sistema de software instalado (un solo cliente) que centraliza vacantes, prospec
 - Modelo UML en Mermaid (clases, secuencia de CU-03 y estados del prospecto): [docs/arch/diagramas.md](docs/arch/diagramas.md)
 
 ### 5. Qué cuesta cambiarlo (Unidad 5)
-- Análisis de impacto del cambio recibido: [doc/cambios/](doc/cambios/)
+- Análisis de impacto del cambio recibido: [docs/cambios/](docs/cambios/)
