@@ -1,17 +1,12 @@
 # Análisis de impacto de SC-001
 
-> Ingeniería de Software I · SIS3407
-> Autor: Elias García Cisneros · Sistema: Base de datos de vacantes y prospectos de R.H. · Fecha: 16/11/2026
-
----
-
 ## Solicitud que se analiza
 
-`sc-001-clasificacion-motivo-archivo.md`. Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos, el 17/11/2026. Tipo de mantenimiento: perfectivo. Prioridad sugerida por el solicitante: alta.
+`sc-001-clasificacion-motivo-archivo.md`. Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos. Tipo de mantenimiento: perfectivo. Prioridad sugerida por el solicitante: alta.
 
 ## Traducción a términos del sistema
 
-Lo pedido: que al archivar a un prospecto se exija el motivo, que se marque si es "Recontratable" o "Descartado definitivo", y que un descartado definitivo no pueda reactivarse ni asignarse a una vacante si vuelve a postularse.
+ Que al archivar a un prospecto se exija el motivo, que se marque si es "Recontratable" o "Descartado definitivo", y que un descartado definitivo no pueda reactivarse ni asignarse a una vacante si vuelve a postularse.
 
 Traducido a mi sistema:
 
@@ -112,6 +107,3 @@ Me inclino por la **A**: el motivo vigente es el que importa para el bloqueo, el
 Se acepta porque el costo es acotado (unas 3.5 jornadas), no toca vacantes ni la arquitectura y reduce el retrabajo que hoy sufre RH en vacantes urgentes. Si las condiciones 1 o 4 no se pueden resolver, aplazo el bloqueo y entrego primero solo el motivo de archivo, que no tiene riesgo de bloquear a la persona equivocada.
 
 ---
-
-*El objetivo de este documento no es dar un número exacto. Es que cualquiera pueda seguir mi razonamiento y señalarme dónde me equivoqué.*
-
