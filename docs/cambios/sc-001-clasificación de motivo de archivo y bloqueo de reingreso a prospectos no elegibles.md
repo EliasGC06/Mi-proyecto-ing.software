@@ -4,7 +4,7 @@
 
 ## Estado
 
-Propuesta · 17 de noviembre de 2026
+Propuesta · 16 de noviembre de 2026
 
 ## Quién la pide
 
