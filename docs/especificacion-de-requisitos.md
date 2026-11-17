@@ -23,7 +23,7 @@ Fuera del alcance:
 |---|---|
 | Comparar prospectos automáticamente. | No hay criterios de evaluación definidos |
 | Reportes financieros o de nómina. | Este tema lo manejaría Contaduría/Finanzas especificamente, confirmado en la entrevista (pregunta 13) |
-| Notificaciones automáticas por correo o SMS, WhatsApp u otros canales distintos al correo. | Requiere un desarrollo más extenso no contemplado para esta versión. | 
+| Notificaciones automáticas por SMS, WhatsApp u otros canales distintos al correo. | Requiere un desarrollo más extenso no contemplado para esta versión. | 
 
 ## 2. Usuarios y su contexto
 
