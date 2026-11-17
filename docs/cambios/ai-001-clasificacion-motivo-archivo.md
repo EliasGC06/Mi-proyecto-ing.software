@@ -2,7 +2,7 @@
 
 ## Solicitud que se analiza
 
-Referencia de: `sc-001-clasificacion-motivo-archivo.md`. Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos.
+Referencia a la solicitud: [`sc-001-clasificacion-motivo-archivo.md`](sc-001-clasificacion-motivo-archivo.md). Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos. Este análisis dice cuánto cuesta el cambio; no lo implementa, y los cambios derivados en la especificación y en los diagramas quedan marcados como propuesta hasta que se decida.
 
 ## Traducción a términos del sistema
 
