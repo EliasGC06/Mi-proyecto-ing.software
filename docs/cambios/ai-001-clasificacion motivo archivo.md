@@ -2,7 +2,7 @@
 
 ## Solicitud que se analiza
 
-`sc-001-clasificacion-motivo-archivo.md`. Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos. Tipo de mantenimiento: perfectivo. Prioridad sugerida por el solicitante: alta.
+Referencia de: `sc-001-clasificacion-motivo-archivo.md`. Pedida por la dupla de revisión, en el papel de Coordinadora de Recursos Humanos.
 
 ## Traducción a términos del sistema
 
@@ -74,6 +74,7 @@ Traducido a mi sistema:
 ## Alternativas consideradas
 
 1. **Opción A · Atributos en Prospecto.** Se agregan `motivoArchivo`, `clasificacionArchivo` y `fechaArchivo` a la clase Prospecto y una guarda en `reactivar()` y `esElegible()`. Cuesta poco: un cambio de clase, una validación y una pantalla. Deja pendiente que, si una persona se archiva, se reactiva y se archiva otra vez, solo se conserva el último motivo (la bitácora guarda quién y cuándo, no el texto).
+
 2. **Opción B · Entidad separada `RegistroDeArchivo`.** Cada archivado crea un registro (Prospecto 1..* RegistroDeArchivo) con motivo, clasificación, fecha y usuario. Conserva todo el historial y es más coherente con RNF-03 y RNF-06. Cuesta más: una clase y una relación nuevas, cambios en el historial (RF-008) y más pruebas. Deja pendiente decidir cuál registro manda si hay varios con clasificaciones distintas.
 
 Me inclino por la **A**: el motivo vigente es el que importa para el bloqueo, el costo es menor y la B se puede adoptar después sin romper A, porque los datos de A se migran como el primer registro de B.
@@ -87,13 +88,7 @@ Me inclino por la **A**: el motivo vigente es el que importa para el bloqueo, el
 | Pruebas | 7 h |
 | **Total** | **28 h (rango 23 a 34 h, unas 3.5 jornadas de 8 h; el rango equivale a unas 3 a 4 jornadas)** |
 
-**De dónde sale este número.** Conté artefactos y les asigné un tiempo por unidad.
-- **Diseño y documentación (9 h):** 9 elementos de la SRS (RF-003, RF-014, RF-010, RF-013, RF-008, CU-08, CU-01, CU-03 y la trazabilidad) a unos 30 min son 4.5 h; los diagramas de clases, secuencia y estados, más el de componentes, 3 h; el prototipo, 1.5 h.
-- **Implementación (12 h):** campos y migración (2 h), formulario de archivar con validación (2 h), bloqueo en `reactivar()` y `esElegible()` (3 h), alerta (1.5 h), campos en `VisibilidadRH` (1 h), exclusión del motivo en el correo (0.5 h), y que Prospecto publique su evento a Bitácora y Notificaciones (2 h).
-- **Pruebas (7 h):** los 2 criterios de aceptación, la prueba de los tres roles de RNF-01 con campos nuevos, que archivar un prospecto sin postulación quede en la bitácora y en el correo, y la regresión de CU-01, CU-03 y CU-08 (incluida la liberación de la vacante al archivar desde "En proceso").
-- **Rango:** aplicué aproximadamente ±20 % al total (22.4 a 33.6 h), redondeado a 23 y 34 h, porque es una estimación por conteo y no por medición.
-- **Supuestos:** una sola persona que ya conoce el sistema y se elige la Opción A.
-- **No incluí:** la revisión legal del riesgo 4, ni cambiar el reconocimiento de reingreso a un identificador único (por ejemplo, CURP). Con la Opción B suben unas 6 a 8 h. El número viene de mi conteo de artefactos y no de un cambio previo comparable; es una estimación, no una medición.
+**De dónde sale este número:** en el diseño y documentación tomaría 9 h, por los 9 elementos de la SRS (RF-003, RF-014, RF-010, RF-013, RF-008, CU-08, CU-01, CU-03 y la trazabilidad) a unos 30 min son 4.5 h; los diagramas de clases, secuencia y estados, más el de componentes, 3 h; el prototipo, 1.5 h. La implementación serían 12 h, campos y migración (2 h), formulario de archivar con validación (2 h), bloqueo en `reactivar()` y `esElegible()` (3 h), alerta (1.5 h), campos en `VisibilidadRH` (1 h), exclusión del motivo en el correo (0.5 h), y que Prospecto publique su evento a Bitácora y Notificaciones (2 h) y con las pruebas para comprobar todo se ocuparía 7 h, los 2 criterios de aceptación, la prueba de los tres roles de RNF-01 con campos nuevos, que archivar un prospecto sin postulación quede en la bitácora y en el correo, y la regresión de CU-01, CU-03 y CU-08 (incluida la liberación de la vacante al archivar desde "En proceso"). Use un rango de tiempo el cual redondeé, el promedio de horas es 22.4 a 33.6 h, redondeado a 23 y 34 h.
 
 ## Recomendación
 
