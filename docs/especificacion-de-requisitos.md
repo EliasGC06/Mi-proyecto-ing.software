@@ -15,7 +15,7 @@ https://scope-hull-09512178.figma.site/
 
 Propósito del documento: En este documento se especifica lo que se hace y con que calidad debe tener el sistema que desarrollaremos para recopilar y concentrar la información de las vacantes, prospectos y personal activo de la empresa. Este nace en base a la visión del producto que hicimos y la entrevista realizada.
 
-Alcance del sistema: Registrar prospectos según su vacante, darles un estatus, verificar sus datos, filtrar la información, adjuntar y consultar sus documentos, ver el historial profesional del prospecto, restringir la información sensible a las otras áreas y mostrar con prioridad las vacantes urgentes.   
+Alcance del sistema: Registrar prospectos según su vacante, darles un estatus, verificar sus datos, filtrar la información, adjuntar y consultar sus documentos, ver el historial profesional del prospecto, restringir la información sensible a las otras áreas y mostrar con prioridad las vacantes urgentes y enviar por correo avisos de cambios de estatus a Finanzas/Contaduría y Corporativo.   
 
 Fuera del alcance:
 
@@ -23,7 +23,7 @@ Fuera del alcance:
 |---|---|
 | Comparar prospectos automáticamente. | No hay criterios de evaluación definidos |
 | Reportes financieros o de nómina. | Este tema lo manejaría Contaduría/Finanzas especificamente, confirmado en la entrevista (pregunta 13) |
-| Notificaciones automáticas por correo o SMS. | Requiere un desarrollo más extenso no contemplado para esta versión. | 
+| Notificaciones automáticas por correo o SMS, WhatsApp u otros canales distintos al correo. | Requiere un desarrollo más extenso no contemplado para esta versión. | 
 
 ## 2. Usuarios y su contexto
 
@@ -54,6 +54,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | RF-010 | Reservar los datos sensibles a RH | Alta | Visión (regla 2) |
 | RF-011 | Mostrar las vacantes urgentes con prioridad | Alta | P.8 |
 | RF-012 | Señalar las vacantes reabiertas a Finanzas/Contaduría | Alta | P.4, P.8 |
+| RF-013 | Avisar por correo los cambios de estatus | Media | Entrevista (P.4, P.8) |
 
 ### 3.2 Fichas 
  
@@ -73,7 +74,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Origen | Supuesto (Visión, alcance 3). El estatus "archivado" está Confirmado (P.12) y la reapertura de vacantes viene de la excepción de la ficha de dominio (P.4). |
 | Prioridad | Alta |
 | Criterio de aceptación | Todo prospecto y toda vacante guardados tienen un solo estatus válido; cuando RH reabre una vacante ocupada e indica el motivo, su estatus pasa a "disponible", conserva su urgencia y se registra usuario, fecha y motivo. |
-| Relacionado con | CU-02, CU-03, CU-07, CU-08, RF-003, RF-012, RNF-03 |
+| Relacionado con | CU-02, CU-03, CU-07, CU-08, CU-09, RF-003, RF-012, RNF-03 |
 
 ## RF-003 · Archivar prospecto que no termina su proceso y reutilizar su registro 
 | Campo | Contenido |
@@ -165,6 +166,15 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Criterio de aceptación | Dado una vacante reabierta hoy, cuando un usuario de Finanzas/Contaduría abre su pantalla de inicio, la ve en "Reabiertas recientes" con fecha y hora de reapertura. |
 | Relacionado con | CU-07, RF-002, RNF-02 |
 
+## RF-013 · Avisar por correo los cambios de estatus
+| Campo | Contenido |
+|---|---|
+| Descripción | El sistema debe enviar por correo un aviso a Finanzas/Contaduría y Corporativo cuando cambie el estatus de una vacante o de un prospecto. |
+| Origen | Confirmado (P.4, P.8): hay que avisar con urgencia a Finanzas cuando una vacante se reabre. |
+| Prioridad | Media |
+| Criterio de aceptación | Dado un cambio de estatus guardado (por ejemplo, asignar un prospecto o reabrir una vacante), cuando el sistema termina de guardarlo, entonces envía un correo a Finanzas/Contaduría y Corporativo que indica quién hizo el cambio, qué cambió y cuándo. |
+| Relacionado con | CU-03, CU-07, CU-08, RF-002, RF-012, RNF-02, RNF-06 |
+
 ## 4. Requisitos no funcionales
 
 ### 4.1 Resumen
@@ -190,6 +200,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | CU-06 | Consultar estatus de vacantes |
 | CU-07 | Reabrir vacante ocupada |
 | CU-08 | Archivar prospectos |
+| CU-09 | Contratar prospecto |
 
 ### CU-01 · Registrar prospecto
  
@@ -287,12 +298,24 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Postcondición | El prospecto queda "archivado" con todos sus datos y documentos conservados, y puede reutilizarse si vuelve a aplicar (CU-01). Si hubo un fallo, no cambia ningún dato. |
 | Requisitos que utiliza | RF-002, RF-003 |
 
+### CU-09 · Contratar prospecto
+
+| Campo | Contenido |
+|---|---|
+| Actor | Recursos Humanos (RH) |
+| Objetivo | Marcar a un prospecto como contratado y cubrir la vacante a la que está ligado. |
+| Precondición | RH está autenticado; el prospecto está "en proceso" y ligado a una vacante "disponible". |
+| Escenario principal | 1. RH abre el registro del prospecto en proceso. <br> 2. RH selecciona "Contratar". <br> 3. El sistema muestra el resumen (prospecto y vacante) y pide confirmación. <br> 4. RH confirma. <br> 5. El sistema cambia el prospecto a "contratado", cambia la vacante a "ocupada" y registra usuario, fecha y hora. <br> 6. El sistema muestra la confirmación. |
+| Flujos alternos | **A1 · RH cancela (paso 4).** No se guarda ningún cambio. <br> **A2 · El prospecto no está en proceso (paso 2).** El sistema no permite contratarlo e indica su estatus actual. <br> **A3 · La vacante ya está ocupada (paso 5).** Otra sesión la ocupó antes; el sistema lo informa y no cambia nada. |
+| Postcondición | El prospecto está "contratado" y la vacante "ocupada"; el cambio queda registrado y las demás áreas lo ven en 5 segundos o menos. Si hubo un fallo, no cambia ningún dato. |
+
+
 ## 6. Trazabilidad
 
 | Requisito | Origen | Caso de uso | Elemento del prototipo |
 |---|---|---|---|
 | RF-001 | Visión (alcance 1 y 2), P.5 | CU-01, CU-02 | — |
-| RF-002 | Visión (alcance 3), P.12, P.4 | CU-02, CU-03, CU-07, CU-08 | P.4, P.5 |
+| RF-002 | Visión (alcance 3), P.12, P.4 | CU-02, CU-03, CU-07, CU-08, CU-09 | P.4, P.5 |
 | RF-003 | P.10, P.12 | CU-01, CU-08 | P.3 |
 | RF-004 | Visión (alcance 4) | CU-01, CU-02 | — |
 | RF-005 | P.11 | CU-03 | P.6 |
@@ -303,6 +326,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | RF-010 | Visión (regla 2) | CU-01, CU-04 | P.7 |
 | RF-011 | P.8 (supuesto) | CU-05, CU-06 | P.1, P.7 |
 | RF-012 | P.4, P.8 | CU-06, CU-07 | P.7 |
+| RF-013 | P.4, P.8 | CU-03, CU-07, CU-08 | — |
 
 
 ## 7. Registro de cambios
@@ -315,6 +339,9 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | 01/10/2026 | RF-008 | Se agregó consultar el historial profesional de un prospecto en un solo lugar. | Buscar archivo por archivo apareció como el mayor dolor, repetido en dos respuestas de la entrevista (P.7, P.9). |
 | 01/10/2026 | RF-012 | Se agregó señalar a Finanzas/Contaduría las vacantes reabiertas. | Hay que avisarles con urgencia cuando una vacante se reabre (P.4, P.8) |
 | 01/10/2026 | RNF-01 a RNF-06 / Visión del producto | Se agrego una métrica a los atributos de calidad "trazabilidad". | La Visión nombraba solo 3 atributos, pero observo que faltaba uno que definiera los cambios que se hacen en el sistema y que queden registrado quien fue, cuando y en que parte del mismo. |
+| 16/11/2026 | RF-013 / Alcance | Se agregó el aviso por correo de cambios de estatus y se dejaron fuera solo los otros canales (SMS, WhatsApp). | La arquitectura (ADR-001) y el diagrama de secuencia de CU-03 ya incluían avisos por correo, y la entrevista confirmó que Finanzas debe enterarse con urgencia (P.4, P.8). |
+| 16/11/2026 | RF-002 / CU-09 | Se agregó el caso de uso "Contratar prospecto". | El diagrama de estados mostró que no existía ningún caso de uso que llevara al prospecto a "contratado" ni a la vacante a "ocupada", aunque RF-002 y CU-03 (flujo A2) los suponen. |
+
 
 ## 8. Revisión de la dupla
 
