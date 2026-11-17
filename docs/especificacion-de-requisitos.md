@@ -4,9 +4,9 @@ Sistema: Base de Datos de vacantes y prospectos R.H.
 
 Autor: Elias García Cisneros
 
-Versión: 0.2 
+Versión: 0.3 
 
-Fecha de la última actualización: 16/11/2026
+Fecha de la última actualización: 17/11/2026
 
 ## 1. Propósito y alcance
 
@@ -44,7 +44,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 |---|---|---|---|
 | RF-001 | Registrar prospecto y vacante | Alta | Visión (alcance 1 y 2) y P.5 |
 | RF-002 | Mantener estatus del prospecto, si no termina su proceso, y la vacante | Alta | Visión (alcance 3) y P.12 |
-| RF-003 | Archivar prospecto que no termina su proceso, para usar su registro en un futuro, si vuelve a aplicar | Alta | P.10 y P.12 |
+| RF-003 | Archivar prospecto que no termina su proceso, para usar su registro en un futuro, si vuelve a aplicar; exige motivo y clasificación al archivar (ampliación propuesta en SC-001) | Alta | P.10, P.12 y SC-001 (propuesta) |
 | RF-004 | Validar campos obligatorios, formato de teléfono y correo | Alta | Visión (alcance 4) |
 | RF-005 | Impedir que un prospecto esté activo en dos vacantes | Alta | P.11 |
 | RF-006 | Filtrar vacantes y prospectos |Alta| Visión (alcance 5) |
@@ -55,6 +55,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | RF-011 | Mostrar las vacantes urgentes con prioridad | Alta | P.8 |
 | RF-012 | Señalar las vacantes reabiertas a Finanzas/Contaduría | Alta | P.4, P.8 |
 | RF-013 | Avisar por correo los cambios de estatus | Media | Entrevista (P.4, P.8) |
+| RF-014 | Impedir el reingreso de prospectos descartados definitivamente (propuesta SC-001) | Alta | SC-001 (propuesta) |
 
 ### 3.2 Fichas 
  
@@ -79,11 +80,12 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 ## RF-003 · Archivar prospecto que no termina su proceso y reutilizar su registro 
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe cambiar a "archivado" a un prospecto que no termina su proceso, sin eliminar su información, y reutilizar ese registro si vuelve a aplicar. |
-| Origen | Confirmado (P.10, P.12) |
+| Estado del cambio | La ampliación de motivo y clasificación está en SC-001, como propuesta pendiente de aceptación. Lo demás de este requisito es el comportamiento ya especificado. |
+| Descripción | El sistema debe cambiar a "archivado" a un prospecto que no termina su proceso, sin eliminar su información, y reutilizar ese registro si vuelve a aplicar. *(Propuesta SC-001, pendiente de aceptación)* Al archivar, el sistema debe exigir el motivo de archivo y su clasificación ("Recontratable" o "Descartado definitivo"), y guardarlos junto con la fecha de archivo. |
+| Origen | Confirmado (P.10, P.12). La ampliación del motivo y la clasificación viene de SC-001 (propuesta). |
 | Prioridad | Alta |
-| Criterio de aceptación | Dado un prospecto "en proceso" que RH descarta, cuando RH confirma, entonces su estatus es "archivado" y sus datos y documentos siguen consultables; cuando RH registra a una persona que ya tiene un registro archivado, el sistema le muestra ese registro y le permite reactivarlo en lugar de crear uno nuevo. |
-| Relacionado con | CU-08, CU-01, RF-002, RF-008, RNF-03|
+| Criterio de aceptación | Dado un prospecto "en proceso" que RH descarta, cuando RH confirma, entonces su estatus es "archivado" y sus datos y documentos siguen consultables; cuando RH registra a una persona que ya tiene un registro archivado, el sistema le muestra ese registro y le permite reactivarlo en lugar de crear uno nuevo. *(Propuesta SC-001, pendiente de aceptación)* Cuando RH intenta archivar sin indicar el motivo o la clasificación, el sistema no archiva y marca el campo que falta; la reactivación solo se permite si el registro está clasificado como "Recontratable" (ver RF-014). |
+| Relacionado con | CU-08, CU-01, CU-03, RF-002, RF-008, RF-010, RF-014, RNF-03 |
  
 ## RF-004 · Validar campos obligatorios, formato de teléfono y correo 
 | Campo | Contenido |
@@ -142,11 +144,12 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 ## RF-010 · Reservar los datos sensibles a RH 
 | Campo | Contenido |
 |---|---|
-| Descripción | El sistema debe permitir ver y editar los campos "problemas médicos" y "comentarios internos" solo a usuarios RH. |
-| Origen | Supuesto (Visión, regla 2) |
+| Estado del cambio | La ampliación a motivo y clasificación de archivo está en SC-001, como propuesta pendiente de aceptación. |
+| Descripción | El sistema debe permitir ver y editar los campos "problemas médicos" y "comentarios internos" solo a usuarios RH. *(Propuesta SC-001, pendiente de aceptación)* Lo mismo aplica a "motivo de archivo" y "clasificación de archivo", que además no deben aparecer en los avisos por correo (RF-013). |
+| Origen | Supuesto (Visión, regla 2); ampliación propuesta en SC-001. |
 | Prioridad | Alta |
-| Criterio de aceptación | Dado un usuario sin rol RH, cuando intenta abrir o editar esos campos, el sistema no los muestra y rechaza la edición. |
-| Relacionado con | CU-01, CU-04, RF-001, RNF-01, RNF-06 |
+| Criterio de aceptación | Dado un usuario sin rol RH, cuando intenta abrir o editar esos campos, el sistema no los muestra y rechaza la edición. *(Propuesta SC-001, pendiente de aceptación)* Esto incluye el motivo y la clasificación de archivo. |
+| Relacionado con | CU-01, CU-04, CU-08, RF-001, RF-003, RF-013, RF-014, RNF-01, RNF-06 |
  
 ## RF-011 · Mostrar las vacantes urgentes con prioridad 
 | Campo | Contenido |
@@ -175,13 +178,23 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Criterio de aceptación | Dado un cambio de estatus guardado (por ejemplo, asignar un prospecto o reabrir una vacante), cuando el sistema termina de guardarlo, entonces envía un correo a Finanzas/Contaduría y Corporativo que indica quién hizo el cambio, qué cambió y cuándo. |
 | Relacionado con | CU-03, CU-07, CU-08, RF-002, RF-012, RNF-02, RNF-06 |
 
+## RF-014 · Impedir el reingreso de prospectos descartados definitivamente
+| Campo | Contenido |
+|---|---|
+| Estado del cambio | **Propuesta (SC-001, 17/11/2026), pendiente de aceptación.** No describe algo que el sistema haga hoy. |
+| Descripción | El sistema debe impedir que un prospecto archivado con clasificación "Descartado definitivo" sea reactivado o asignado a una vacante, y debe mostrar a RH una alerta con el motivo y la fecha del descarte. |
+| Origen | SC-001 (propuesta de la dupla de revisión) |
+| Prioridad | Alta (sugerida por quien la solicita) |
+| Criterio de aceptación | Dado un prospecto archivado como "Descartado definitivo", cuando RH intenta reactivarlo (CU-01, flujo A3) o asignarlo a una vacante (CU-03, flujo A3), entonces el sistema deshabilita la reactivación, muestra el motivo y la fecha en que fue descartado, y no borra su expediente. |
+| Relacionado con | CU-01, CU-03, CU-08, RF-003, RF-010, RNF-01, RNF-03, RNF-06 |
+
 ## 4. Requisitos no funcionales
 
 ### 4.1 Resumen
 
 |ID|Atributo de calidad|Descripción Métrica|Origen|Prioridad|Por qué importa|Afecta a|
 |---|---|---|---|---|---|---|
-|RNF-01|Confidencialidad|El 100% de los intentos de un usuario sin rol RH por ver o editar datos sensibles (problemas médicos, comentarios internos) debe ser rechazado. Se verifica con pruebas de los tres roles.| Visión (atributo de confidencialidad)| Alta | Son datos de salud y comentarios internos; una filtración daña a la persona y genera riesgo legal, por eso no admite excepciones.|RF-009, RF-010, CU-01, CU-04, CU-06 |
+|RNF-01|Confidencialidad|El 100% de los intentos de un usuario sin rol RH por ver o editar datos sensibles (problemas médicos, comentarios internos y, en la propuesta SC-001, motivo y clasificación de archivo) debe ser rechazado. Se verifica con pruebas de los tres roles.| Visión (atributo de confidencialidad)| Alta | Son datos de salud y comentarios internos; una filtración daña a la persona y genera riesgo legal, por eso no admite excepciones.|RF-009, RF-010, RF-014, CU-01, CU-03, CU-04, CU-06, CU-08 |
 |RNF-02|Integridad|Un cambio de estatus de una vacante o prospecto debe ser visible para los tres roles en 5 segundos o menos.| Entrevista (P.8 y ficha de dominio: respuestas desactualizadas a Contaduría); Visión (integridad)|Alta| Hoy Contaduría recibe respuestas desactualizadas porque la información no se sincroniza entre áreas; con 5 segundos el problema desaparece en la práctica.| RF-002, RF-012, CU-03, CU-06, CU-07 |
 |RNF-03|Integridad|Cero registros de prospecto eliminados físicamente: toda baja se hace por archivado y se conservan sus datos y documentos. | Confirmado (P.10, P.12)| Alta | La información de un prospecto nunca se borra, porque puede volver a aplicar y RH necesita su historial.| RF-003, CU-01, CU-08 |
 |RNF-04|Usabilidad|Una persona de RH que no haya usado el sistema debe registrar un prospecto completo en 3 minutos o menos, sin capacitación. Se prueba con 3 personas.|Visión (usabilidad)|Alta|Si el sistema es más lento que Excel o WhatsApp, RH regresa al método anterior y el sistema fracasa.|RF-001, RF-004, CU-01 |
@@ -210,9 +223,9 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Objetivo | Dar de alta a un prospecto con sus datos y documentos para poder darle seguimiento. |
 | Precondición | RH está autenticado. |
 | Escenario principal | 1. RH selecciona "Registrar prospecto". <br> 2. El sistema muestra el formulario con nombre, edad, puesto, empresa, horario, localidad, escolaridad, teléfono, correo, problemas médicos y comentarios internos (estos dos últimos solo visibles para RH). <br> 3. RH captura los datos. <br> 4. RH adjunta los documentos del prospecto. <br> 5. RH guarda. <br> 6. El sistema valida los campos obligatorios y el formato de teléfono y correo. <br> 7. El sistema guarda el prospecto con estatus "prospecto" y lo muestra en el listado. |
-| Flujos alternos | **A1 · Campo obligatorio vacío o formato inválido (paso 6).** El sistema no guarda, marca cada campo con error e indica el formato esperado; RH corrige y vuelve al paso 5. <br> **A2 · Documento no válido (paso 4).** Si el archivo no es PDF, JPG o PNG, o pesa más de 10 MB, el sistema lo rechaza con un mensaje; RH adjunta otro o continúa sin él. <br> **A3 · La persona ya tiene un registro archivado (paso 6).** El sistema muestra ese registro y permite reactivarlo en lugar de crear uno nuevo; si RH acepta, se actualiza el registro conservando su historial. |
+| Flujos alternos | **A1 · Campo obligatorio vacío o formato inválido (paso 6).** El sistema no guarda, marca cada campo con error e indica el formato esperado; RH corrige y vuelve al paso 5. <br> **A2 · Documento no válido (paso 4).** Si el archivo no es PDF, JPG o PNG, o pesa más de 10 MB, el sistema lo rechaza con un mensaje; RH adjunta otro o continúa sin él. <br> **A3 · La persona ya tiene un registro archivado (paso 6).** El sistema muestra ese registro. Si está clasificado como "Recontratable", permite reactivarlo en lugar de crear uno nuevo; si RH acepta, se actualiza el registro conservando su historial. *(Propuesta SC-001, pendiente de aceptación)* Si está clasificado como "Descartado definitivo", el sistema muestra una alerta con el motivo y la fecha del descarte, no permite reactivarlo ni asignarlo a una vacante, y no modifica ni borra el expediente. |
 | Postcondición | El prospecto queda registrado con estatus "prospecto", con sus datos y documentos consultables; los datos sensibles solo los ve RH. Si hubo un fallo, no se guarda ningún dato. |
-| Requisitos que utiliza | RF-001, RF-003, RF-004, RF-007, RF-010 |
+| Requisitos que utiliza | RF-001, RF-003, RF-004, RF-007, RF-010, RF-014 |
  
 ### CU-02 · Registrar vacante
  
@@ -233,10 +246,10 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | Actor | Recursos Humanos (RH) |
 | Objetivo | Ligar un prospecto con una vacante disponible y dejarlo "en proceso". |
 | Precondición | RH está autenticado; existe un prospecto registrado y una vacante con estatus "disponible". |
-| Escenario principal | 1. RH abre una vacante disponible desde el listado. <br> 2. RH selecciona "Asignar prospecto". <br> 3. El sistema muestra los prospectos sin vacante activa, con filtros. <br> 4. RH selecciona un prospecto. <br> 5. El sistema muestra el resumen (prospecto y vacante) y pide confirmación. <br> 6. RH confirma. <br> 7. El sistema verifica que el prospecto no esté activo en otra vacante y que la vacante siga disponible. <br> 8. El sistema cambia el prospecto a "en proceso", lo liga a la vacante y registra usuario, fecha y hora. <br> 9. El sistema muestra la vacante con el prospecto asignado. |
-| Flujos alternos | **A1 · Prospecto activo en otra vacante (paso 7).** El sistema rechaza la asignación e indica en cuál vacante está activo; RH puede cancelar o abrir esa vacante. <br> **A2 · La vacante dejó de estar disponible (paso 7).** Otra sesión la ocupó mientras RH decidía; el sistema avisa, no asigna y actualiza el listado. <br> **A3 · Prospecto archivado que vuelve a aplicar (paso 3).** RH lo busca; el sistema lo muestra con marca "archivado"; RH lo reactiva conservando su historial y continúa en el paso 4. <br> **A4 · No hay prospectos elegibles (paso 3).** El sistema lo informa y ofrece registrar un prospecto (CU-01). <br> **A5 · RH cancela (paso 6).** No se guarda ningún cambio y regresa al detalle de la vacante. |
+| Escenario principal | 1. RH abre una vacante disponible desde el listado. <br> 2. RH selecciona "Asignar prospecto". <br> 3. El sistema muestra los prospectos sin vacante activa, con filtros (en la propuesta SC-001, no se muestran como elegibles los "Descartado definitivo"). <br> 4. RH selecciona un prospecto. <br> 5. El sistema muestra el resumen (prospecto y vacante) y pide confirmación. <br> 6. RH confirma. <br> 7. El sistema verifica que el prospecto no esté activo en otra vacante y que la vacante siga disponible. <br> 8. El sistema cambia el prospecto a "en proceso", lo liga a la vacante y registra usuario, fecha y hora. <br> 9. El sistema muestra la vacante con el prospecto asignado. |
+| Flujos alternos | **A1 · Prospecto activo en otra vacante (paso 7).** El sistema rechaza la asignación e indica en cuál vacante está activo; RH puede cancelar o abrir esa vacante. <br> **A2 · La vacante dejó de estar disponible (paso 7).** Otra sesión la ocupó mientras RH decidía; el sistema avisa, no asigna y actualiza el listado. <br> **A3 · Prospecto archivado que vuelve a aplicar (paso 3).** RH lo busca; el sistema lo muestra con marca "archivado". Si está clasificado como "Recontratable", RH lo reactiva conservando su historial y continúa en el paso 4. *(Propuesta SC-001, pendiente de aceptación)* Si está clasificado como "Descartado definitivo", el sistema muestra una alerta con el motivo y la fecha del descarte, no permite reactivarlo ni asignarlo, y no cambia ningún dato. <br> **A4 · No hay prospectos elegibles (paso 3).** El sistema lo informa y ofrece registrar un prospecto (CU-01). <br> **A5 · RH cancela (paso 6).** No se guarda ningún cambio y regresa al detalle de la vacante. |
 | Postcondición | El prospecto está "en proceso" y ligado a la vacante, el cambio queda registrado y las demás áreas ven el estatus actualizado en 5 segundos o menos. Si hubo un fallo, no cambia ningún dato. |
-| Requisitos que utiliza | RF-002, RF-005, RF-006 |
+| Requisitos que utiliza | RF-002, RF-005, RF-006, RF-014 |
  
 ### CU-04 · Consultar historial de un prospecto
  
@@ -290,13 +303,14 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
  
 | Campo | Contenido |
 |---|---|
+| Estado del cambio | Los pasos de motivo y clasificación, y el flujo A4, son una **propuesta (SC-001), pendiente de aceptación**. El resto es el comportamiento ya especificado. |
 | Actor | Recursos Humanos (RH) |
-| Objetivo | Apartar a un prospecto que no termina su proceso sin perder su información, para reutilizarla si vuelve a aplicar. |
+| Objetivo | Apartar a un prospecto que no termina su proceso sin perder su información, indicando por qué se archivó y si podría volver a considerarse. |
 | Precondición | RH está autenticado; existe un prospecto con estatus "prospecto" o "en proceso". |
-| Escenario principal | 1. RH abre el registro del prospecto. <br> 2. RH selecciona "Archivar". <br> 3. El sistema pide confirmación e indica que la información se conserva. <br> 4. RH confirma. <br> 5. El sistema cambia el estatus a "archivado", libera la vacante si el prospecto estaba ligado a una y registra usuario, fecha y hora. <br> 6. El sistema muestra la confirmación; los datos y documentos del prospecto siguen consultables. |
-| Flujos alternos | **A1 · RH cancela (paso 4).** No se guarda ningún cambio. <br> **A2 · El prospecto ya está contratado (paso 2).** El sistema no permite archivarlo, porque ya terminó su proceso. <br> **A3 · El prospecto ya está archivado (paso 2).** El sistema lo informa y no cambia nada. |
-| Postcondición | El prospecto queda "archivado" con todos sus datos y documentos conservados, y puede reutilizarse si vuelve a aplicar (CU-01). Si hubo un fallo, no cambia ningún dato. |
-| Requisitos que utiliza | RF-002, RF-003 |
+| Escenario principal | 1. RH abre el registro del prospecto. <br> 2. RH selecciona "Archivar". <br> 3. El sistema pide el motivo de archivo y la clasificación: "Recontratable" o "Descartado definitivo" *(propuesta SC-001)*. <br> 4. RH captura el motivo y elige la clasificación *(propuesta SC-001)*. <br> 5. El sistema pide confirmación e indica que la información se conserva. <br> 6. RH confirma. <br> 7. El sistema cambia el estatus a "archivado", guarda el motivo, la clasificación y la fecha de archivo *(propuesta SC-001)*, libera la vacante si el prospecto estaba ligado a una y registra usuario, fecha y hora. <br> 8. El sistema muestra la confirmación; los datos y documentos del prospecto siguen consultables. |
+| Flujos alternos | **A1 · RH cancela (paso 6).** No se guarda ningún cambio. <br> **A2 · El prospecto ya está contratado (paso 2).** El sistema no permite archivarlo, porque ya terminó su proceso. <br> **A3 · El prospecto ya está archivado (paso 2).** El sistema lo informa y no cambia nada. <br> **A4 · Falta el motivo o la clasificación (paso 6).** *(Propuesta SC-001)* El sistema no archiva, marca el campo que falta y RH lo completa o cancela. |
+| Postcondición | El prospecto queda "archivado" con todos sus datos y documentos conservados, junto con su motivo, clasificación y fecha de archivo *(propuesta SC-001)*. Si es "Recontratable", puede reutilizarse si vuelve a aplicar (CU-01, CU-03); si es "Descartado definitivo", no puede reactivarse ni asignarse (RF-014). Si hubo un fallo, no cambia ningún dato. |
+| Requisitos que utiliza | RF-002, RF-003, RF-010, RF-014 |
 
 ### CU-09 · Contratar prospecto
 
@@ -316,17 +330,18 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 |---|---|---|---|
 | RF-001 | Visión (alcance 1 y 2), P.5 | CU-01, CU-02 | — |
 | RF-002 | Visión (alcance 3), P.12, P.4 | CU-02, CU-03, CU-07, CU-08, CU-09 | P.4, P.5 |
-| RF-003 | P.10, P.12 | CU-01, CU-08 | P.3 |
+| RF-003 | P.10, P.12; SC-001 (propuesta) | CU-01, CU-03, CU-08 | P.3 |
 | RF-004 | Visión (alcance 4) | CU-01, CU-02 | — |
 | RF-005 | P.11 | CU-03 | P.6 |
 | RF-006 | Visión (alcance 5) | CU-03, CU-05 | P.1, P.3 |
 | RF-007 | Visión (alcance 6) | CU-01, CU-04 | — |
 | RF-008 | P.7, P.9 | CU-04 | — |
 | RF-009 | Visión (resolución del conflicto) | CU-06 | P.7 |
-| RF-010 | Visión (regla 2) | CU-01, CU-04 | P.7 |
+| RF-010 | Visión (regla 2); SC-001 (propuesta) | CU-01, CU-04, CU-08 | P.7 |
 | RF-011 | P.8 (supuesto) | CU-05, CU-06 | P.1, P.7 |
 | RF-012 | P.4, P.8 | CU-06, CU-07 | P.7 |
 | RF-013 | P.4, P.8 | CU-03, CU-07, CU-08 | — |
+| RF-014 | SC-001 (propuesta) | CU-01, CU-03, CU-08 | P.3 (por actualizar) |
 
 
 ## 7. Registro de cambios
@@ -341,7 +356,7 @@ Finanzas/Contaduría y Corporativo quieren visibilidad amplia, pero los datos se
 | 01/10/2026 | RNF-01 a RNF-06 / Visión del producto | Se agrego una métrica a los atributos de calidad "trazabilidad". | La Visión nombraba solo 3 atributos, pero observo que faltaba uno que definiera los cambios que se hacen en el sistema y que queden registrado quien fue, cuando y en que parte del mismo. |
 | 16/11/2026 | RF-013 / Alcance | Se agregó el aviso por correo de cambios de estatus y se dejaron fuera solo los otros canales (SMS, WhatsApp). | La arquitectura (ADR-001) y el diagrama de secuencia de CU-03 ya incluían avisos por correo, y la entrevista confirmó que Finanzas debe enterarse con urgencia (P.4, P.8). |
 | 16/11/2026 | RF-002 / CU-09 | Se agregó el caso de uso "Contratar prospecto". | El diagrama de estados mostró que no existía ningún caso de uso que llevara al prospecto a "contratado" ni a la vacante a "ocupada", aunque RF-002 y CU-03 (flujo A2) los suponen. |
-
+| 17/11/2026 | RF-003, RF-010, RF-014, RNF-01, CU-01, CU-03, CU-08 | **Propuesta SC-001, todavía no aceptada:** se amplían RF-003, RF-010 y RNF-01; se agrega RF-014; y se ajustan CU-01, CU-03 y CU-08 para exigir motivo y clasificación al archivar y bloquear el reingreso de los "Descartado definitivo". | La solicitud SC-001 (`docs/cambios/sc-001-clasificacion-motivo-archivo.md`, de la dupla de revisión, 17/11/2026) y su análisis de impacto AI-001 recomiendan aceptarla con condiciones. Los cambios quedan marcados como propuesta hasta que se decida. |
 
 ## 8. Revisión de la dupla
 
