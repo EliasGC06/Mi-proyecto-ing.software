@@ -53,13 +53,14 @@ Visibilidad de datos según tu área, Finanzas/Contaduría solo ve temas de nóm
 |6| Adjuntar y consultar los documentos de un prospecto. |
 |7| Restringir la visualización de datos sensibles (problemas médicos, comentarios) solo a usuarios de RH. |
 |8| Mostrar las vacantes urgentes con prioridad a todas las áreas. |
+|9| Enviar por correo un aviso a Finanzas/Contaduría y Corporativo cuando cambie el estatus de una vacante o de un prospecto.| 
 
 **Fuera del alcance**
 |Numero| No permite | Por qué queda fuera |
 |---|---|---|
 |01| Compara prospectos automáticamente. | Requiere criterios de evaluación que todavía no están definidos. |
 |02| Genera reportes financieros o de nómina exportables. | Es responsabilidad de Contaduría y Finanzas, y mezclarlo sobrecargaría la base. |
-|03| Envía notificaciones automáticas por correo o SMS. | Requiere integrar servicios externos que no están contemplados en esta versión. |
+|03| Envía avisos por SMS, WhatsApp u otros canales distintos al correo. | Requiere integrar servicios externos que no están contemplados en esta versión. |
 
 ---
 
